@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Danh sách khóa học";
+    var userRole = Context.Session.GetString("UserRole");
 }
 
 <head>
@@ -10,7 +11,7 @@
     <title>Danh sách khóa học</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/home.css" />
-    <style> 
+    <style>
         .course-cards {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -28,9 +29,9 @@
             transition: transform 0.3s;
         }
 
-            .course-card:hover {
-                transform: translateY(-5px);
-            }
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
 
         .image-container {
             width: 100%;
@@ -42,11 +43,11 @@
             align-items: center;
         }
 
-            .image-container img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .course-content {
             padding: 15px;
@@ -55,17 +56,17 @@
             flex: 1;
         }
 
-            .course-content h3 {
-                font-size: 1.3rem;
-                margin-bottom: 10px;
-                color: #333;
-            }
+        .course-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
 
-            .course-content p {
-                font-size: 0.95rem;
-                color: #444;
-                margin-bottom: 15px;
-            }
+        .course-content p {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 15px;
+        }
 
         .course-dates {
             font-size: 0.9rem;
@@ -77,10 +78,9 @@
             margin-top: auto;
         }
 
-            .course-actions a {
-                margin-right: 5px;
-            }
-
+        .course-actions a {
+            margin-right: 5px;
+        }
     </style>
 </head>
 
@@ -91,14 +91,18 @@
 <div class="container">
     <h1>Danh sách khóa học</h1>
     <p>
-        <a asp-action="Create" class="btn btn-success btn-add">Thêm mới</a>
+        @if (userRole == "admin")
+        {
+            <a asp-action="Create" class="btn btn-success btn-add">Thêm mới</a>
+        }
     </p>
     <div class="course-cards">
         @foreach (var item in Model)
         {
             <div class="course-card">
                 <div class="image-container">
-                    <img src="~/images/@item.image" alt="@item.TenKhoaHoc" onerror="this.src='/images/default-course.png'" />
+                    <img src="~/images/@item.image" alt="@item.TenKhoaHoc"
+                        onerror="this.src='/images/default-course.png'" />
                 </div>
                 <div class="course-content">
                     <h3>@item.TenKhoaHoc</h3>
@@ -108,9 +112,12 @@
                         <span class="course-date">Kết thúc: @item.NgayKetThuc.ToString("dd/MM/yyyy")</span>
                     </div>
                     <div class="course-actions">
-                        <a asp-action="Edit" asp-route-id="@item.MaKhoaHoc" class="btn btn-warning">Sửa</a>
+                        @if (userRole == "admin")
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.MaKhoaHoc" class="btn btn-warning">Sửa</a>
+                            <a asp-action="Delete" asp-route-id="@item.MaKhoaHoc" class="btn btn-danger">Xóa</a>
+                        }
                         <a asp-action="Details" asp-route-id="@item.MaKhoaHoc" class="btn btn-info">Chi tiết</a>
-                        <a asp-action="Delete" asp-route-id="@item.MaKhoaHoc" class="btn btn-danger">Xóa</a>
                     </div>
                 </div>
             </div>

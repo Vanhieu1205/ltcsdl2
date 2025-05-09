@@ -538,4 +538,5 @@ D:\code\hk2-nam3\ltcsdltest\LTCSDL_WEBCLB\ClbTinhoc.Web\obj\Debug\net8.0\refint\
 D:\code\hk2-nam3\ltcsdltest\LTCSDL_WEBCLB\ClbTinhoc.Web\obj\Debug\net8.0\ClbTinhoc.Web.pdb
 D:\code\hk2-nam3\ltcsdltest\LTCSDL_WEBCLB\ClbTinhoc.Web\obj\Debug\net8.0\ClbTinhoc.Web.genruntimeconfig.cache
 D:\code\hk2-nam3\ltcsdltest\LTCSDL_WEBCLB\ClbTinhoc.Web\obj\Debug\net8.0\ref\ClbTinhoc.Web.dll
+D:\code\hk2-nam3\ltcsdltest\LTCSDL_WEBCLB\ClbTinhoc.Web\obj\Debug\net8.0\ClbTinhoc.Web.sourcelink.json
 D:\code\hk2-nam3\ltcsdltest\LTCSDL_WEBCLB\ClbTinhoc.Web\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

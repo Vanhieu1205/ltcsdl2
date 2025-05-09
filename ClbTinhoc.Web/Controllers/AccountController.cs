@@ -44,6 +44,7 @@ namespace ClbTinhoc.Web.Controllers
             // Lưu thông tin đăng nhập vào session
             HttpContext.Session.SetString("UserId", user.Id.ToString());
             HttpContext.Session.SetString("Username", user.studentId);
+            HttpContext.Session.SetString("UserRole", user.Role ?? "user");
 
             return RedirectToAction("Index", "Home");
         }
@@ -72,6 +73,9 @@ namespace ClbTinhoc.Web.Controllers
                     return View(model);
                 }
 
+                // Gán quyền mặc định là user
+                model.Role = "user";
+
                 // Add the new user to the database
                 _context.Add(model);
                 await _context.SaveChangesAsync();
@@ -86,6 +90,12 @@ namespace ClbTinhoc.Web.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Account/AccessDenied
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
