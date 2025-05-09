@@ -1,0 +1,59 @@
+﻿@model ClbTinhoc.Web.Models.KhoaHoc
+
+@{
+    ViewData["Title"] = "Chỉnh sửa khóa học";
+}
+
+<h1>Chỉnh sửa khóa học</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MaKhoaHoc" />
+            <input type="hidden" asp-for="image" />
+
+            <div class="form-group mb-3">
+                <label asp-for="TenKhoaHoc" class="control-label">Tên khóa học</label>
+                <input asp-for="TenKhoaHoc" class="form-control" required />
+                <span asp-validation-for="TenKhoaHoc" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="MoTa" class="control-label">Mô tả</label>
+                <textarea asp-for="MoTa" class="form-control" rows="3" required></textarea>
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="NgayBatDau" class="control-label">Ngày bắt đầu</label>
+                <input asp-for="NgayBatDau" class="form-control" type="date" required />
+                <span asp-validation-for="NgayBatDau" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="NgayKetThuc" class="control-label">Ngày kết thúc</label>
+                <input asp-for="NgayKetThuc" class="form-control" type="date" required />
+                <span asp-validation-for="NgayKetThuc" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label for="ImageFile" class="control-label">Hình ảnh mới (để trống nếu không thay đổi)</label>
+                <input type="file" id="ImageFile" name="ImageFile" class="form-control" accept="image/*" />
+            </div>
+            <div class="form-group mb-3">
+                <label class="control-label">Hình ảnh hiện tại</label>
+                <div>
+                    <img src="~/images/@Model.image" alt="@Model.TenKhoaHoc" style="max-width: 200px;" class="img-thumbnail" onerror="this.src='/images/default-course.png'" />
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

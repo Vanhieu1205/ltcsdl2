@@ -1,0 +1,123 @@
+﻿@model IEnumerable<ClbTinhoc.Web.Models.KhoaHoc>
+
+@{
+    ViewData["Title"] = "Danh sách khóa học";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách khóa học</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/home.css" />
+    <style> 
+        .course-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .course-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+
+            .course-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .image-container {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .course-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+            .course-content h3 {
+                font-size: 1.3rem;
+                margin-bottom: 10px;
+                color: #333;
+            }
+
+            .course-content p {
+                font-size: 0.95rem;
+                color: #444;
+                margin-bottom: 15px;
+            }
+
+        .course-dates {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .course-actions {
+            margin-top: auto;
+        }
+
+            .course-actions a {
+                margin-right: 5px;
+            }
+
+    </style>
+</head>
+
+<div class="container">
+    @await Html.PartialAsync("_Header")
+</div>
+
+<div class="container">
+    <h1>Danh sách khóa học</h1>
+    <p>
+        <a asp-action="Create" class="btn btn-success btn-add">Thêm mới</a>
+    </p>
+    <div class="course-cards">
+        @foreach (var item in Model)
+        {
+            <div class="course-card">
+                <div class="image-container">
+                    <img src="~/images/@item.image" alt="@item.TenKhoaHoc" onerror="this.src='/images/default-course.png'" />
+                </div>
+                <div class="course-content">
+                    <h3>@item.TenKhoaHoc</h3>
+                    <p>@(item.MoTa?.Length > 100 ? item.MoTa.Substring(0, 100) + "..." : item.MoTa)</p>
+                    <div class="course-dates">
+                        <span class="course-date">Bắt đầu: @item.NgayBatDau.ToString("dd/MM/yyyy")</span>
+                        <span class="course-date">Kết thúc: @item.NgayKetThuc.ToString("dd/MM/yyyy")</span>
+                    </div>
+                    <div class="course-actions">
+                        <a asp-action="Edit" asp-route-id="@item.MaKhoaHoc" class="btn btn-warning">Sửa</a>
+                        <a asp-action="Details" asp-route-id="@item.MaKhoaHoc" class="btn btn-info">Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@item.MaKhoaHoc" class="btn btn-danger">Xóa</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<footer class="text-center mt-4">
+    <p>&copy; @DateTime.Now.Year CIT Academy</p>
+</footer>

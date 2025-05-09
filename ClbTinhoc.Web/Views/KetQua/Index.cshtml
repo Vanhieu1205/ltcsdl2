@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ClbTinhoc.Web.Models.KetQua>
+
+@{
+    ViewData["Title"] = "Kết quả học tập";
+}
+
+<div class="container mt-4">
+    <h1>Kết quả học tập</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Thêm mới</a>
+    </p>
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Sinh viên</th>
+                <th>Lớp học</th>
+                <th>Điểm cuối kỳ</th>
+                <th>Ngày cập nhật</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SinhVien?.HoTen</td>
+                    <td>@item.KhoaHoc?.TenKhoaHoc</td>
+                    <td>@item.DiemCuoiKy</td>
+                    <td>@item.NgayCapNhat.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.MaKetQua" class="btn btn-sm btn-warning">Sửa</a>
+                        <a asp-action="Details" asp-route-id="@item.MaKetQua" class="btn btn-sm btn-info">Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@item.MaKetQua" class="btn btn-sm btn-danger">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

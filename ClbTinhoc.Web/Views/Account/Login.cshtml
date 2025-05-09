@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Đăng nhập - Câu Lạc Bộ Tin Học";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-container">
+            <img src="~/images/BG1.jpg" alt="Logo" class="logo">
+        </div>
+
+        <div class="form-container">
+            <h1>CÂU LẠC BỘ TIN HỌC</h1>
+
+            <form asp-controller="Account" asp-action="Login" method="post">
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div style="color:red;">@TempData["ErrorMessage"]</div>
+                }
+
+
+                <div class="form-group">
+                    <label for="StudentId">Tên đăng nhập</label>
+                    <input type="text" class="form-control" id="StudentId" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-button">Đăng Nhập</button>
+
+                
+                <p>
+                    Chưa có tài khoản? <a href="@Url.Action("Register", "Account")">Đăng ký</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

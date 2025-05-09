@@ -1,0 +1,48 @@
+﻿<header>
+    <div class="container">
+        <div class="logo">
+            <img src="~/images/logo.png" alt="CLB Tin Học Logo" onerror="this.src='/images/default-course.png'">
+        </div>
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Home")">TRANG CHỦ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "KhoaHoc") : Url.Action("Login", "Account"))">
+                    KHÓA HỌC
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "Support") : Url.Action("Login", "Account"))">
+                    Support
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "SinhVien") : Url.Action("Login", "Account"))">
+                    SINH VIÊN
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "KetQua") : Url.Action("Login", "Account"))">
+                    Kết Quả
+                </a>
+            </li>
+        </ul>
+
+        <div class="user-info-container">
+            @if (Context.Session.GetString("Username") != null)
+            {
+                <div class="user-info">
+                    <span>XIN CHÀO, @Context.Session.GetString("Username").ToUpper()</span>
+                </div>
+                <a href="@Url.Action("Logout", "Account")" class="btn btn-primary">ĐĂNG XUẤT</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Account")" class="btn btn-primary">ĐĂNG NHẬP</a>
+                <a href="@Url.Action("Register", "Account")" class="btn btn-primary" style="margin-left: 10px;">ĐĂNG KÝ</a>
+            }
+        </div>
+    </div>
+</header>

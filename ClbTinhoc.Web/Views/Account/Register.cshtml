@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CÂU LẠC BỘ TIN HỌC - Đăng ký</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f5ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            height: 600px;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 150, 0.1);
+        }
+
+        .logo-section, .form-section {
+            flex: 1;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a67c2, #0d5cb6);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        .logo-section img {
+            width: 90%;
+            max-width: 380px;
+            margin-bottom: 30px;
+        }
+
+        .logo-section h1 {
+            margin: 0;
+            font-size: 28px;
+            text-align: center;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .form-section {
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .form-section h2 {
+            color: #1a67c2;
+            margin-bottom: 25px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 1px solid #cfd8dc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #1a67c2;
+            box-shadow: 0 0 0 2px rgba(26, 103, 194, 0.1);
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #1a67c2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0d5cb6;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .text-center {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .text-center a {
+            color: #1a67c2;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .text-center a:hover {
+            color: #0d5cb6;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #e53935;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        @@media (max-width: 768px)  {
+            .container {
+                flex-direction: column;
+                height: auto;
+                max-height: 90vh;
+            }
+
+            .logo-section {
+                padding: 30px 20px;
+            }
+
+            .logo-section img {
+                width: 70%;
+                margin-bottom: 15px;
+            }
+
+            .form-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <img src="/images/BG1.jpg" alt="CÂU LẠC BỘ TIN HỌC Logo">
+            <h1>CÂU LẠC BỘ TIN HỌC</h1>
+        </div>
+        <div class="form-section">
+            <h2>Đăng ký thành viên</h2>
+            <form asp-controller="Account" asp-action="Register" method="post">
+                <div class="form-group" id="error-container">
+                    <!-- Error messages will appear here -->
+                </div>
+                
+                <div class="form-group">
+                    <label for="studentId">Mã Sinh viên</label>
+                    <input type="text" class="form-control" id="studentId" name="studentId" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Tên sinh viên</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="Email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="SoDienThoai">Số Điện Thoại</label>
+                    <input type="tel" class="form-control" id="SoDienThoai" name="SoDienThoai" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="NgaySinh">Ngày Sinh</label>
+                    <input type="date" class="form-control" id="NgaySinh" name="NgaySinh" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pass">Mật khẩu</label>
+                    <input type="password" class="form-control" id="pass" name="pass" required>
+                </div>
+                
+                <button type="submit" class="btn">Đăng ký</button>
+                
+                <p class="text-center">
+                    Đã có tài khoản? <a href="@Url.Action("login", "Account")">Đăng Nhập</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Basic form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const studentId = document.getElementById('studentId').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            let errorMessages = [];
+            
+            // Example validation
+            if (password.length < 6) {
+                errorMessages.push("Mật khẩu phải có ít nhất 6 ký tự");
+            }
+            
+            if (!phone.match(/^[0-9]{10}$/)) {
+                errorMessages.push("Số điện thoại không hợp lệ");
+            }
+            
+            // Display errors if any
+            if (errorMessages.length > 0) {
+                e.preventDefault();
+                const errorContainer = document.getElementById('error-container');
+                errorContainer.innerHTML = '';
+                
+                errorMessages.forEach(message => {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'error-message';
+                    errorDiv.textContent = message;
+                    errorContainer.appendChild(errorDiv);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

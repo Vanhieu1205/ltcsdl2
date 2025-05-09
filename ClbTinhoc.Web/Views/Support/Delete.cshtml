@@ -1,0 +1,38 @@
+﻿@model ClbTinhoc.Web.Models.Support
+
+@{
+    ViewData["Title"] = "Xóa Support";
+}
+
+<div class="container mt-4">
+    <h1>Xóa Support</h1>
+    <div class="alert alert-danger">
+        <h3>Bạn có chắc chắn muốn xóa Support này?</h3>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Mã Support:</dt>
+                <dd class="col-sm-9">@Model.MaSupport</dd>
+
+                <dt class="col-sm-3">Họ tên:</dt>
+                <dd class="col-sm-9">@Model.HoTen</dd>
+
+                <dt class="col-sm-3">Email:</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+
+                <dt class="col-sm-3">Lớp sinh hoạt:</dt>
+                <dd class="col-sm-9">@Model.LopSinhHoat</dd>
+
+                <dt class="col-sm-3">Số điện thoại:</dt>
+                <dd class="col-sm-9">@Model.SoDienThoai</dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="MaSupport" />
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            </form>
+        </div>
+    </div>
+</div>

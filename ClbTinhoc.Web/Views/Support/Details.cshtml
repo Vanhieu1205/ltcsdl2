@@ -1,0 +1,51 @@
+﻿@model ClbTinhoc.Web.Models.Support
+
+@{
+    ViewData["Title"] = "Chi tiết Support";
+}
+
+<div class="container mt-4">
+    <h1>Chi tiết Support</h1>
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h4>@Model.HoTen</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                    {
+                        <img src="~/images/@Model.HinhAnh" alt="@Model.HoTen" class="img-fluid rounded" />
+                    }
+                    else
+                    {
+                        <img src="~/images/default-avatar.png" alt="Default" class="img-fluid rounded" />
+                    }
+                </div>
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-4">Mã Support:</dt>
+                        <dd class="col-sm-8">@Model.MaSupport</dd>
+
+                        <dt class="col-sm-4">Họ tên:</dt>
+                        <dd class="col-sm-8">@Model.HoTen</dd>
+
+                        <dt class="col-sm-4">Email:</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
+
+                        <dt class="col-sm-4">Lớp sinh hoạt:</dt>
+                        <dd class="col-sm-8">@Model.LopSinhHoat</dd>
+
+                        <dt class="col-sm-4">Số điện thoại:</dt>
+                        <dd class="col-sm-8">@Model.SoDienThoai</dd>
+                    </dl>
+                </div>
+            </div>
+            
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.MaSupport" class="btn btn-warning">Sửa</a>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </div>
+    </div>
+</div>

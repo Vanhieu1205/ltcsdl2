@@ -1,0 +1,34 @@
+﻿@model ClbTinhoc.Web.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Chi tiết sinh viên";
+}
+
+<h1>Chi tiết sinh viên</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Mã sinh viên</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MaSinhVien)</dd>
+
+        <dt class="col-sm-3">Họ tên</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.HoTen)</dd>
+
+        <dt class="col-sm-3">Lớp sinh hoạt</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.LopSinhHoat)</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+        <dt class="col-sm-3">Số điện thoại</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.SoDienThoai)</dd>
+
+        <dt class="col-sm-3">Ngày tham gia</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.NgayThamGia)</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaSinhVien" class="btn btn-warning">Sửa</a> |
+    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+</div>

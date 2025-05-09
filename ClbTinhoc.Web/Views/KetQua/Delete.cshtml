@@ -1,0 +1,35 @@
+﻿@model ClbTinhoc.Web.Models.KetQua
+
+@{
+    ViewData["Title"] = "Xóa kết quả";
+}
+
+<div class="container mt-4">
+    <h1>Xóa kết quả học tập</h1>
+    <div class="alert alert-danger">
+        <h3>Bạn có chắc chắn muốn xóa kết quả này?</h3>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Sinh viên:</dt>
+                <dd class="col-sm-9">@Model.SinhVien?.HoTen</dd>
+
+                <dt class="col-sm-3">Lớp học:</dt>
+                <dd class="col-sm-9">@Model.KhoaHoc?.TenKhoaHoc</dd>
+
+                <dt class="col-sm-3">Điểm cuối kỳ:</dt>
+                <dd class="col-sm-9">@Model.DiemCuoiKy</dd>
+
+                <dt class="col-sm-3">Ngày cập nhật:</dt>
+                <dd class="col-sm-9">@Model.NgayCapNhat.ToString("dd/MM/yyyy HH:mm")</dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="MaKetQua" />
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            </form>
+        </div>
+    </div>
+</div>

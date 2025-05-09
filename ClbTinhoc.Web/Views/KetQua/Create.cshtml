@@ -1,0 +1,42 @@
+﻿@model ClbTinhoc.Web.Models.KetQua
+
+@{
+    ViewData["Title"] = "Thêm kết quả";
+}
+
+<div class="container mt-4">
+    <h1>Thêm kết quả học tập</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-3">
+                    <label asp-for="MaSinhVien" class="control-label">Sinh viên</label>
+                    <select asp-for="MaSinhVien" class="form-select" asp-items="ViewBag.MaSinhVien"></select>
+                    <span asp-validation-for="MaSinhVien" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="MaKhoaHoc" class="control-label">KhoaHoc</label>
+                    <select asp-for="MaKhoaHoc" class="form-select" asp-items="ViewBag.MaLopHoc"></select>
+                    <span asp-validation-for="MaKhoaHoc" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="DiemCuoiKy" class="control-label">Điểm cuối kỳ</label>
+                    <input asp-for="DiemCuoiKy" class="form-control" type="number" step="0.1" min="0" max="10" />
+                    <span asp-validation-for="DiemCuoiKy" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <input type="submit" value="Thêm mới" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,38 @@
+﻿@model ClbTinhoc.Web.Models.KhoaHoc
+
+@{
+    ViewData["Title"] = "Xóa khóa học";
+}
+
+<h1>Xóa khóa học</h1>
+
+<h3>Bạn có chắc chắn muốn xóa khóa học này?</h3>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <img src="~/images/@Model.image" class="img-fluid rounded" alt="@Model.TenKhoaHoc" onerror="this.src='/images/default-course.png'" />
+        </div>
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-3">Tên khóa học</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.TenKhoaHoc)</dd>
+
+                <dt class="col-sm-3">Mô tả</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.MoTa)</dd>
+
+                <dt class="col-sm-3">Ngày bắt đầu</dt>
+                <dd class="col-sm-9">@Model.NgayBatDau.ToString("dd/MM/yyyy")</dd>
+
+                <dt class="col-sm-3">Ngày kết thúc</dt>
+                <dd class="col-sm-9">@Model.NgayKetThuc.ToString("dd/MM/yyyy")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="MaKhoaHoc" />
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </form>
+</div>

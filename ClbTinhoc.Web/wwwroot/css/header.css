@@ -1,0 +1,120 @@
+﻿/* General Header Styling */
+header {
+    background-color: #28a745;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+    /* Căn chỉnh container */
+    header .container {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: center;
+        width: 95%;
+        max-width: 1200px;
+        margin: 0 auto;
+        height: 80px;
+    }
+
+    /* Logo Styling */
+    header .logo img {
+        height: 80px;
+        width: auto;
+        border-radius: 8px;
+    }
+
+    /* Navigation Menu */
+    header .navbar-nav {
+        display: flex;
+        flex-direction: row !important; /* Đảm bảo hiển thị ngang */
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+    }
+
+        /* Menu Items - Chỉnh màu trắng */
+        header .navbar-nav .nav-link {
+            color: white !important; /* Đảm bảo màu trắng */
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 15px;
+            text-transform: uppercase;
+        }
+
+            /* Hiệu ứng hover */
+            header .navbar-nav .nav-link:hover {
+                color: #ffd700 !important; /* Màu vàng khi hover */
+            }
+
+    /* User Info Section */
+    header .user-info-container {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 20px;
+        font-size: 16px;
+    }
+    /* Nút đăng nhập */
+    header .btn-primary {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 8px 15px;
+    }
+
+/* Responsive Header */
+/* Responsive Header */
+@media (max-width: 1024px) {
+    header .container {
+        padding: 10px;
+    }
+}
+
+/* Mobile View (max-width: 768px) */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column !important;
+        height: auto;
+        padding: 15px 0;
+    }
+
+    header .navbar-nav {
+        flex-direction: column !important;
+        gap: 10px;
+        margin: 15px 0;
+    }
+
+    header .user-info-container {
+        flex-direction: column !important;
+        gap: 10px;
+    }
+}
+
+/* Mobile View (max-width: 480px) */
+@media (max-width: 480px) {
+    header .container {
+        padding: 10px 0;
+    }
+
+    header .logo img {
+        height: 60px;
+    }
+
+    header .navbar-nav .nav-link {
+        font-size: 14px;
+    }
+
+    header .user-info img {
+        height: 25px;
+        width: 25px;
+    }
+
+    header .btn-primary {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+}

@@ -1,0 +1,33 @@
+﻿@model ClbTinhoc.Web.Models.KetQua
+
+@{
+    ViewData["Title"] = "Chi tiết kết quả";
+}
+
+<div class="container mt-4">
+    <h1>Chi tiết kết quả học tập</h1>
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h4>Thông tin kết quả</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Sinh viên:</dt>
+                <dd class="col-sm-9">@Model.SinhVien?.HoTen</dd>
+
+                <dt class="col-sm-3">Lớp học:</dt>
+                <dd class="col-sm-9">@Model.KhoaHoc?.TenKhoaHoc</dd>
+
+                <dt class="col-sm-3">Điểm cuối kỳ:</dt>
+                <dd class="col-sm-9">@Model.DiemCuoiKy</dd>
+
+                <dt class="col-sm-3">Ngày cập nhật:</dt>
+                <dd class="col-sm-9">@Model.NgayCapNhat.ToString("dd/MM/yyyy HH:mm")</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.MaKetQua" class="btn btn-warning">Sửa</a>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </div>
+    </div>
+</div>

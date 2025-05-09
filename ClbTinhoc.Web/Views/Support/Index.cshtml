@@ -1,0 +1,116 @@
+﻿@model IEnumerable<ClbTinhoc.Web.Models.Support>
+
+@{
+    ViewData["Title"] = "Danh sách Support";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách Support</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        .custom-card {
+            height: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 250px; /* Chiều cao cố định cho hình ảnh */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+
+        .card-img-top.avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* đảm bảo hình ảnh không méo, cắt đều */
+            transition: transform 0.3s ease;
+        }
+
+            .card-img-top.avatar:hover {
+                transform: scale(1.05);
+            }
+
+        .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .action-buttons {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .btn-sm {
+            padding: 4px 8px;
+            font-size: 0.8rem;
+        }
+    </style>
+
+</head>
+
+<div class="container">
+    @await Html.PartialAsync("_Header")
+</div>
+
+<div class="container mt-4">
+    <h1 class="text-center">Danh sách Support</h1>
+
+    <p class="text-center">
+        <a asp-action="Create" class="btn btn-success btn-add">Thêm mới</a>
+    </p>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card custom-card">
+                    <div class="card-img-container">
+                        <img src="@(string.IsNullOrEmpty(item.HinhAnh) ? "/images/default-avatar.png" : Url.Content("~/images/" + item.HinhAnh))"
+                             class="card-img-top avatar"
+                             alt="@item.HoTen"
+                             onerror="this.src='/images/default-avatar.png';" />
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">@item.HoTen</h5>
+                        <p class="card-text"><strong>Mã:</strong> @item.MaSupport</p>
+                        <p class="card-text"><strong>Email:</strong> @item.Email</p>
+                        <p class="card-text"><strong>Lớp:</strong> @item.LopSinhHoat</p>
+                        <p class="card-text"><strong>SDT:</strong> @item.SoDienThoai</p>
+
+                        <div class="action-buttons">
+                            <a asp-action="Edit" asp-route-id="@item.MaSupport" class="btn btn-warning btn-sm">Sửa</a>
+                            <a asp-action="Details" asp-route-id="@item.MaSupport" class="btn btn-info btn-sm">Chi tiết</a>
+                            <a asp-action="Delete" asp-route-id="@item.MaSupport" class="btn btn-danger btn-sm">Xóa</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
