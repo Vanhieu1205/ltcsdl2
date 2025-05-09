@@ -6,9 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ClbTinhoc.Web.Attributes;
 
 namespace ClbTinhoc.Web.Controllers
 {
+    [RequireLogin]
     public class KetQuaController : Controller
     {
         private readonly ApplicationDbContext _context;

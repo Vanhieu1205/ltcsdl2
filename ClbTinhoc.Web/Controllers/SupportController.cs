@@ -7,9 +7,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ClbTinhoc.Web.Attributes;
 
 namespace ClbTinhoc.Web.Controllers
 {
+    [RequireLogin]
     public class SupportController : Controller
     {
         private readonly ApplicationDbContext _context;

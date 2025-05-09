@@ -1,4 +1,4 @@
-﻿using ClbTinhoc.Web.Data;
+using ClbTinhoc.Web.Data;
 using ClbTinhoc.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +9,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ClbTinhoc.Web.Attributes;
 
-namespace ClbTinhoc.Web.Controllers
+namespace ClbTinhoc.Web.Controllers.Admin
 {
     [RequireLogin]
+    [RequireAdmin]
+    [Route("admin/[controller]")]
     public class KhoaHocController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,19 +25,19 @@ namespace ClbTinhoc.Web.Controllers
             _logger = logger;
         }
 
-        // GET: KhoaHoc
+        // GET: admin/KhoaHoc
         public async Task<IActionResult> Index()
         {
             return View(await _context.KhoaHoc.ToListAsync());
         }
 
-        // GET: KhoaHoc/Create
+        // GET: admin/KhoaHoc/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: KhoaHoc/Create
+        // POST: admin/KhoaHoc/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TenKhoaHoc,MoTa,NgayBatDau,NgayKetThuc")] KhoaHoc khoaHoc, IFormFile image)
@@ -129,7 +131,7 @@ namespace ClbTinhoc.Web.Controllers
             return sanitized;
         }
 
-        // GET: KhoaHoc/Details/5
+        // GET: admin/KhoaHoc/Details/5
         public async Task<IActionResult> Details(int id)
         {
             var khoaHoc = await _context.KhoaHoc
@@ -159,140 +161,13 @@ namespace ClbTinhoc.Web.Controllers
                 .Select(s => new { s.MaSupport, s.HoTen })
                 .ToListAsync();
 
-            _logger.LogInformation($"Found {availableStudents.Count} available students and {availableSupports.Count} available supports for KhoaHoc ID {id}.");
             ViewBag.AvailableStudents = availableStudents;
             ViewBag.AvailableSupports = availableSupports;
 
             return View(khoaHoc);
         }
 
-        // POST: KhoaHoc/RegisterCourse
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterCourse(int MaKhoaHoc, string MaSinhVien)
-        {
-            try
-            {
-                _logger.LogInformation($"RegisterCourse called with MaKhoaHoc: {MaKhoaHoc}, MaSinhVien: {MaSinhVien}");
-
-                if (string.IsNullOrEmpty(MaSinhVien))
-                {
-                    _logger.LogWarning("MaSinhVien is empty.");
-                    TempData["Error"] = "Vui lòng chọn sinh viên.";
-                    return RedirectToAction("Details", new { id = MaKhoaHoc });
-                }
-
-                var khoaHoc = await _context.KhoaHoc.FindAsync(MaKhoaHoc);
-                if (khoaHoc == null)
-                {
-                    _logger.LogWarning($"KhoaHoc with ID {MaKhoaHoc} not found.");
-                    TempData["Error"] = "Khóa học không tồn tại.";
-                    return RedirectToAction("Details", new { id = MaKhoaHoc });
-                }
-
-                var sinhVien = await _context.SinhVien.FindAsync(MaSinhVien);
-                if (sinhVien == null)
-                {
-                    _logger.LogWarning($"SinhVien with MaSinhVien {MaSinhVien} not found.");
-                    TempData["Error"] = "Sinh viên không tồn tại.";
-                    return RedirectToAction("Details", new { id = MaKhoaHoc });
-                }
-
-                var existing = await _context.KhoaHoc_SinhViens
-                    .AnyAsync(ks => ks.MaKhoaHoc == MaKhoaHoc && ks.MaSinhVien == MaSinhVien);
-
-                if (existing)
-                {
-                    _logger.LogWarning($"SinhVien {MaSinhVien} already enrolled in KhoaHoc {MaKhoaHoc}.");
-                    TempData["Error"] = "Sinh viên đã tham gia khóa học này.";
-                    return RedirectToAction("Details", new { id = MaKhoaHoc });
-                }
-
-                var khoaHocSinhVien = new KhoaHoc_SinhVien
-                {
-                    MaKhoaHoc = MaKhoaHoc,
-                    MaSinhVien = MaSinhVien
-                };
-
-                _logger.LogInformation($"Adding KhoaHoc_SinhVien: MaKhoaHoc={MaKhoaHoc}, MaSinhVien={MaSinhVien}");
-                _context.KhoaHoc_SinhViens.Add(khoaHocSinhVien);
-                await _context.SaveChangesAsync();
-
-                _logger.LogInformation("KhoaHoc_SinhVien saved successfully.");
-                TempData["Success"] = "Đăng ký khóa học thành công.";
-                return RedirectToAction("Details", new { id = MaKhoaHoc });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error registering course: {ex.Message}\nStackTrace: {ex.StackTrace}");
-                TempData["Error"] = "Có lỗi xảy ra khi đăng ký khóa học. Vui lòng thử lại.";
-                return RedirectToAction("Details", new { id = MaKhoaHoc });
-            }
-        }
-
-        // POST: KhoaHoc/RegisterSupport
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterSupport(int MaKhoaHoc, string MaSupport)
-        {
-            try
-            {
-                _logger.LogInformation($"RegisterSupport called with MaKhoaHoc: {MaKhoaHoc}, MaSupport: {MaSupport}");
-
-                if (string.IsNullOrEmpty(MaSupport))
-                {
-                    _logger.LogWarning("MaSupport is empty.");
-                    TempData["Error"] = "Vui lòng chọn support.";
-                    return RedirectToAction("Details", new { id = MaKhoaHoc });
-                }
-
-                var khoaHoc = await _context.KhoaHoc.FindAsync(MaKhoaHoc);
-                if (khoaHoc == null)
-                {
-                    _logger.LogWarning($"KhoaHoc with ID {MaKhoaHoc} not found.");
-                    return NotFound();
-                }
-
-                var support = await _context.Support.FindAsync(MaSupport);
-                if (support == null)
-                {
-                    _logger.LogWarning($"Support with ID {MaSupport} not found.");
-                    TempData["Error"] = "Support không tồn tại.";
-                    return RedirectToAction("Details", new { id = MaKhoaHoc });
-                }
-
-                var existingRegistration = await _context.SupportKhoaHoc
-                    .FirstOrDefaultAsync(ks => ks.MaKhoaHoc == MaKhoaHoc && ks.MaSupport == MaSupport);
-
-                if (existingRegistration != null)
-                {
-                    _logger.LogWarning($"Support {MaSupport} is already registered for KhoaHoc {MaKhoaHoc}");
-                    TempData["Error"] = "Support này đã được đăng ký cho khóa học.";
-                    return RedirectToAction("Details", new { id = MaKhoaHoc });
-                }
-
-                var supportKhoaHoc = new SupportKhoaHoc
-                {
-                    MaKhoaHoc = MaKhoaHoc,
-                    MaSupport = MaSupport
-                };
-
-                _context.SupportKhoaHoc.Add(supportKhoaHoc);
-                await _context.SaveChangesAsync();
-
-                _logger.LogInformation($"Successfully registered Support {MaSupport} for KhoaHoc {MaKhoaHoc}");
-                TempData["Success"] = "Đăng ký support thành công.";
-                return RedirectToAction("Details", new { id = MaKhoaHoc });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error registering support: {ex.Message}\nStackTrace: {ex.StackTrace}");
-                TempData["Error"] = "Có lỗi xảy ra khi đăng ký support. Vui lòng thử lại.";
-                return RedirectToAction("Details", new { id = MaKhoaHoc });
-            }
-        }
-
-        // GET: KhoaHoc/Edit/5
+        // GET: admin/KhoaHoc/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -308,7 +183,7 @@ namespace ClbTinhoc.Web.Controllers
             return View(khoaHoc);
         }
 
-        // POST: KhoaHoc/Edit/5
+        // POST: admin/KhoaHoc/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MaKhoaHoc,TenKhoaHoc,MoTa,NgayBatDau,NgayKetThuc,image")] KhoaHoc khoaHoc, IFormFile ImageFile)
@@ -383,7 +258,7 @@ namespace ClbTinhoc.Web.Controllers
             return View(khoaHoc);
         }
 
-        // GET: KhoaHoc/Delete/5
+        // GET: admin/KhoaHoc/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -401,7 +276,7 @@ namespace ClbTinhoc.Web.Controllers
             return View(khoaHoc);
         }
 
-        // POST: KhoaHoc/Delete/5
+        // POST: admin/KhoaHoc/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

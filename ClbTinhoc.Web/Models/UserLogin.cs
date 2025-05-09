@@ -15,7 +15,8 @@ namespace ClbTinhoc.Web.Models
         public string SoDienThoai { get; set; }
         public DateTime NgaySinh { get; set; }
         public string pass { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn quyền người dùng")]
         [StringLength(50)]
-        public string Role { get; set; }
+        public string Role { get; set; } = UserRoles.User;
     }
 }

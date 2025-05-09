@@ -2,7 +2,10 @@
 using ClbTinhoc.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
+using ClbTinhoc.Web.Attributes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClbTinhoc.Web.Controllers
 {
@@ -16,6 +19,7 @@ namespace ClbTinhoc.Web.Controllers
         }
 
         // GET: Account/Login
+        [AllowAnonymous] // Cho phép truy cập mà không cần đăng nhập
         public IActionResult Login()
         {
             return View();
@@ -24,6 +28,7 @@ namespace ClbTinhoc.Web.Controllers
         // POST: Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous] // Cho phép truy cập mà không cần đăng nhập
         public async Task<IActionResult> Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -41,15 +46,23 @@ namespace ClbTinhoc.Web.Controllers
                 return View();
             }
 
+            // Validate role
+            if (!UserRoles.IsValidRole(user.Role))
+            {
+                user.Role = UserRoles.User; // Set default role if invalid
+                await _context.SaveChangesAsync();
+            }
+
             // Lưu thông tin đăng nhập vào session
             HttpContext.Session.SetString("UserId", user.Id.ToString());
             HttpContext.Session.SetString("Username", user.studentId);
-            HttpContext.Session.SetString("UserRole", user.Role ?? "user");
+            HttpContext.Session.SetString("UserRole", user.Role);
 
             return RedirectToAction("Index", "Home");
         }
 
         // GET: Account/Register
+        [AllowAnonymous] // Cho phép truy cập mà không cần đăng nhập
         public IActionResult Register()
         {
             return View();
@@ -58,6 +71,7 @@ namespace ClbTinhoc.Web.Controllers
         // POST: Account/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous] // Cho phép truy cập mà không cần đăng nhập
         public async Task<IActionResult> Register(UserLogin model)
         {
             if (ModelState.IsValid)
@@ -68,20 +82,41 @@ namespace ClbTinhoc.Web.Controllers
 
                 if (existingUser != null)
                 {
-                    // Return an error message if the user already exists
+                    // Ghi log lỗi ra console/terminal
+                    Console.WriteLine($"[ĐĂNG KÝ] Tên đăng nhập hoặc email đã tồn tại: {model.username} / {model.email}");
                     ViewBag.Error = "Tên đăng nhập hoặc email đã tồn tại";
                     return View(model);
                 }
 
                 // Gán quyền mặc định là user
-                model.Role = "user";
+                model.Role = UserRoles.User;
 
-                // Add the new user to the database
-                _context.Add(model);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    // Add the new user to the database
+                    _context.Add(model);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    // Ghi log lỗi ra console/terminal
+                    Console.WriteLine($"[ĐĂNG KÝ] Lỗi khi lưu tài khoản mới: {ex.Message}");
+                    ModelState.AddModelError("", "Có lỗi xảy ra khi đăng ký tài khoản. Vui lòng thử lại hoặc liên hệ quản trị viên.");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Login));
             }
-
+            else
+            {
+                // Ghi log lỗi ra console/terminal
+                foreach (var entry in ModelState)
+                {
+                    foreach (var error in entry.Value.Errors)
+                    {
+                        Console.WriteLine($"[ĐĂNG KÝ] Lỗi trường {entry.Key}: {error.ErrorMessage}");
+                    }
+                }
+            }
             return View(model);
         }
 
@@ -93,6 +128,7 @@ namespace ClbTinhoc.Web.Controllers
         }
 
         // GET: Account/AccessDenied
+        [AllowAnonymous] // Cho phép truy cập mà không cần đăng nhập
         public IActionResult AccessDenied()
         {
             return View();

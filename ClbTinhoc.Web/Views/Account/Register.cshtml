@@ -181,6 +181,13 @@
                 <form asp-controller="Account" asp-action="Register" method="post">
                     <div class="form-group" id="error-container">
                         <!-- Error messages will appear here -->
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <div class="error-message">@error.ErrorMessage</div>
+                            }
+                        }
                     </div>
 
                     <div class="form-group">
@@ -227,18 +234,18 @@
             document.querySelector('form').addEventListener('submit', function (e) {
                 const studentId = document.getElementById('studentId').value;
                 const email = document.getElementById('email').value;
-                const phone = document.getElementById('phone').value;
-                const password = document.getElementById('password').value;
+                const phone = document.getElementById('SoDienThoai').value;
+                const password = document.getElementById('pass').value;
+                const username = document.getElementById('username').value;
+                const ngaysinh = document.getElementById('NgaySinh').value;
                 let errorMessages = [];
 
-                // Example validation
-                if (password.length < 6) {
-                    errorMessages.push("Mật khẩu phải có ít nhất 6 ký tự");
-                }
-
-                if (!phone.match(/^[0-9]{10}$/)) {
-                    errorMessages.push("Số điện thoại không hợp lệ");
-                }
+                if (!studentId) errorMessages.push('Vui lòng nhập mã sinh viên.');
+                if (!username) errorMessages.push('Vui lòng nhập tên sinh viên.');
+                if (!email) errorMessages.push('Vui lòng nhập email.');
+                if (!phone) errorMessages.push('Vui lòng nhập số điện thoại.');
+                if (!ngaysinh) errorMessages.push('Vui lòng nhập ngày sinh.');
+                if (!password) errorMessages.push('Vui lòng nhập mật khẩu.');
 
                 // Display errors if any
                 if (errorMessages.length > 0) {

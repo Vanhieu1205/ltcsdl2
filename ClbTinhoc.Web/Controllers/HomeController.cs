@@ -3,6 +3,8 @@ using ClbTinhoc.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using ClbTinhoc.Web.Attributes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClbTinhoc.Web.Controllers
 {
@@ -17,12 +19,18 @@ namespace ClbTinhoc.Web.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var khoaHocs = await _context.KhoaHoc.Take(5).ToListAsync();
+            var khoaHocs = await _context.KhoaHoc
+                .OrderByDescending(k => k.NgayBatDau)
+                .Take(5)
+                .ToListAsync();
             return View(khoaHocs);
         }
 
+        [RequireLogin]
+        [RequireAdmin]
         public IActionResult Privacy()
         {
             return View();
