@@ -1,0 +1,39 @@
+@model IEnumerable<ClbTinhoc.Web.Models.DiemThi>
+@{
+    ViewData["Title"] = "Danh sách điểm thi";
+}
+<h2>Danh sách điểm thi</h2>
+<a asp-action="Index" asp-controller="KhoaHoc" class="btn btn-secondary mb-2">Quay lại danh sách khóa học</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sinh viên</th>
+            <th>Khóa học</th>
+            <th>Lần thi</th>
+            <th>Điểm</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SinhVien?.HoTen (@item.MaSinhVien)</td>
+                <td>@item.KhoaHoc?.TenKhoaHoc (@item.MaKhoaHoc)</td>
+                <td>@item.LanThi</td>
+                <td>@item.Diem</td>
+                <td>
+                    <a asp-action="Edit" asp-route-maSinhVien="@item.MaSinhVien" asp-route-maKhoaHoc="@item.MaKhoaHoc"
+                        asp-route-lanThi="@item.LanThi" class="btn btn-sm btn-primary">Sửa</a>
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="maSinhVien" value="@item.MaSinhVien" />
+                        <input type="hidden" name="maKhoaHoc" value="@item.MaKhoaHoc" />
+                        <input type="hidden" name="lanThi" value="@item.LanThi" />
+                        <button type="submit" class="btn btn-sm btn-danger"
+                            onclick="return confirm('Xóa điểm này?')">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

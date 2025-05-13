@@ -55,14 +55,14 @@ namespace ClbTinhoc.Web.Controllers
         public IActionResult Create()
         {
             ViewData["MaSinhVien"] = new SelectList(_context.SinhVien, "MaSinhVien", "HoTen");
-            ViewData["MaLopHoc"] = new SelectList(_context.KhoaHoc, "MaLopHoc", "TenLopHoc");
+            ViewData["MaKhoaHoc"] = new SelectList(_context.KhoaHoc, "MaKhoaHoc", "TenKhoaHoc");
             return View();
         }
 
         // POST: KetQua/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaKetQua,MaSinhVien,MaLopHoc,DiemCuoiKy,NgayCapNhat")] KetQua ketQua)
+        public async Task<IActionResult> Create(KetQua ketQua)
         {
             if (ModelState.IsValid)
             {
@@ -72,62 +72,52 @@ namespace ClbTinhoc.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaSinhVien"] = new SelectList(_context.SinhVien, "MaSinhVien", "HoTen", ketQua.MaSinhVien);
-            ViewData["MaLopHoc"] = new SelectList(_context.KhoaHoc, "MaLopHoc", "TenLopHoc", ketQua.MaKhoaHoc);
+            ViewData["MaKhoaHoc"] = new SelectList(_context.KhoaHoc, "MaKhoaHoc", "TenKhoaHoc", ketQua.MaKhoaHoc);
             return View(ketQua);
         }
 
-        // GET: KetQua/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: KetQua/Edit?maSinhVien=...&maKhoaHoc=...
+        public async Task<IActionResult> Edit(string maSinhVien, int maKhoaHoc)
         {
-            if (id == null)
+            var diemThi = await _context.DiemThi
+                .FirstOrDefaultAsync(d => d.MaSinhVien == maSinhVien && d.MaKhoaHoc == maKhoaHoc);
+            if (diemThi == null)
             {
-                return NotFound();
+                diemThi = new DiemThi
+                {
+                    MaSinhVien = maSinhVien,
+                    MaKhoaHoc = maKhoaHoc,
+                    LanThi = 1
+                };
             }
-
-            var ketQua = await _context.KetQua.FindAsync(id);
-            if (ketQua == null)
-            {
-                return NotFound();
-            }
-            ViewData["MaSinhVien"] = new SelectList(_context.SinhVien, "MaSinhVien", "HoTen", ketQua.MaSinhVien);
-            ViewData["MaLopHoc"] = new SelectList(_context.KhoaHoc, "MaLopHoc", "TenLopHoc", ketQua.MaKhoaHoc);
-            return View(ketQua);
+            ViewBag.TenSinhVien = (await _context.SinhVien.FindAsync(maSinhVien))?.HoTen;
+            ViewBag.TenKhoaHoc = (await _context.KhoaHoc.FindAsync(maKhoaHoc))?.TenKhoaHoc;
+            return View(diemThi);
         }
 
-        // POST: KetQua/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaKetQua,MaSinhVien,MaLopHoc,DiemCuoiKy,NgayCapNhat")] KetQua ketQua)
+        public async Task<IActionResult> Edit(DiemThi model)
         {
-            if (id != ketQua.MaKetQua)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                var diemThi = await _context.DiemThi
+                    .FirstOrDefaultAsync(d => d.MaSinhVien == model.MaSinhVien && d.MaKhoaHoc == model.MaKhoaHoc);
+                if (diemThi == null)
                 {
-                    ketQua.NgayCapNhat = DateTime.Now;
-                    _context.Update(ketQua);
-                    await _context.SaveChangesAsync();
+                    _context.DiemThi.Add(model);
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!KetQuaExists(ketQua.MaKetQua))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    diemThi.Diem = model.Diem;
+                    diemThi.LanThi = model.LanThi;
                 }
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "KetQua");
             }
-            ViewData["MaSinhVien"] = new SelectList(_context.SinhVien, "MaSinhVien", "HoTen", ketQua.MaSinhVien);
-            ViewData["MaLopHoc"] = new SelectList(_context.KhoaHoc, "MaLopHoc", "TenLopHoc", ketQua.MaKhoaHoc);
-            return View(ketQua);
+            ViewBag.TenSinhVien = (await _context.SinhVien.FindAsync(model.MaSinhVien))?.HoTen;
+            ViewBag.TenKhoaHoc = (await _context.KhoaHoc.FindAsync(model.MaKhoaHoc))?.TenKhoaHoc;
+            return View(model);
         }
 
         // GET: KetQua/Delete/5
@@ -156,6 +146,10 @@ namespace ClbTinhoc.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var ketQua = await _context.KetQua.FindAsync(id);
+            if (ketQua == null)
+            {
+                return NotFound();
+            }
             _context.KetQua.Remove(ketQua);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

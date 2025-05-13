@@ -4,16 +4,31 @@
 
 @{
     ViewData["Title"] = "Chi tiết khóa học";
+    var userRole = Context.Session.GetString("UserRole");
 }
-
+<div class="container">
+    @await Html.PartialAsync("_Header")
+</div>
 <h1>Chi tiết khóa học</h1>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+@{
+    var maSinhVien = Context.Session.GetString("MaSinhVien");
+}
 
 <div>
     <hr />
     <div class="row">
         <div class="col-md-4">
             <img src="~/images/@Model.image" class="img-fluid rounded" alt="@Model.TenKhoaHoc"
-                 onerror="this.src='/images/default-course.png'" />
+            onerror="this.src='/images/default-course.png'" />
         </div>
         <div class="col-md-8">
             <dl class="row">
@@ -31,8 +46,16 @@
             </dl>
             <!-- Nút đăng ký khóa học -->
             <div class="mt-3">
-                <button id="registerCourseBtn" class="btn btn-primary">Đăng ký sinh viên</button>
-                <button id="registerSupportBtn" class="btn btn-info">Đăng ký support</button>
+                @if (userRole == "admin")
+                {
+                    <button id="registerCourseBtn" class="btn btn-primary">Đăng ký sinh viên</button>
+                    <button id="registerSupportBtn" class="btn btn-info">Đăng ký support</button>
+                }
+                @if (userRole == "user")
+                {
+                    <button id="registerCourseBtn" class="btn btn-primary">Đăng ký sinh viên</button>
+                }
+
             </div>
             <div id="registerCourseForm" class="mt-3" style="display:none;">
                 <form asp-action="RegisterCourse" asp-controller="KhoaHoc" method="post">
@@ -51,7 +74,7 @@
                                 }
                             </select>
                             <button type="button" class="btn btn-outline-secondary"
-                                    onclick="$('#MaSinhVien').select2('open');">
+                            onclick="$('#MaSinhVien').select2('open');">
                                 <i class="bi bi-caret-down-fill"></i>
                             </button>
                         </div>
@@ -83,7 +106,7 @@
                                 }
                             </select>
                             <button type="button" class="btn btn-outline-secondary"
-                                    onclick="$('#MaSupport').select2('open');">
+                            onclick="$('#MaSupport').select2('open');">
                                 <i class="bi bi-caret-down-fill"></i>
                             </button>
                         </div>
@@ -101,8 +124,55 @@
         </div>
     </div>
 
+    <h3 class="mt-4">Danh sách sinh viên chờ duyệt</h3>
+    @if (Model.KhoaHoc_SinhVien != null && Model.KhoaHoc_SinhVien.Any(x => x.TrangThai ==
+      "ChoDuyet"))
+    {
+        <table class="table table-warning">
+            <thead>
+                <tr>
+                    <th>Mã sinh viên</th>
+                    <th>Họ tên</th>
+                    <th>Lớp sinh hoạt</th>
+                    <th>Email</th>
+                    @if (userRole == "admin")
+                    {
+                        <th>Thao tác</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ks in Model.KhoaHoc_SinhVien.Where(x => x.TrangThai == "ChoDuyet"))
+                {
+                    <tr>
+                        <td>@ks.MaSinhVien</td>
+                        <td>@(ks.SinhVien?.HoTen ?? "Không tìm thấy")</td>
+                        <td>@(ks.SinhVien?.LopSinhHoat ?? "Không tìm thấy")</td>
+                        <td>@(ks.SinhVien?.Email ?? "Không tìm thấy")</td>
+                        @if (userRole == "admin" )
+                        {
+                            <td>
+                                <form asp-action="ApproveStudent" asp-controller="KhoaHoc" method="post" style="display:inline;">
+                                    <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
+                                    <input type="hidden" name="MaSinhVien" value="@ks.MaSinhVien" />
+                                    <button type="submit" class="btn btn-success btn-sm">Duyệt</button>
+                                </form>
+                                <form asp-action="RejectStudent" asp-controller="KhoaHoc" method="post" style="display:inline;">
+                                    <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
+                                    <input type="hidden" name="MaSinhVien" value="@ks.MaSinhVien" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Từ chối</button>
+                                </form>
+                            </td>
+                        }
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
     <h3 class="mt-4">Danh sách sinh viên tham gia</h3>
-    @if (Model.KhoaHoc_SinhVien != null && Model.KhoaHoc_SinhVien.Any())
+    @if (Model.KhoaHoc_SinhVien != null && Model.KhoaHoc_SinhVien.Any(x => x.TrangThai == "DaDuyet"))
     {
         <table class="table table-striped">
             <thead>
@@ -115,7 +185,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ks in Model.KhoaHoc_SinhVien)
+                @foreach (var ks in Model.KhoaHoc_SinhVien.Where(x => x.TrangThai == "DaDuyet"))
                 {
                     <tr>
                         <td>@ks.MaSinhVien</td>
@@ -124,7 +194,15 @@
                         <td>@(ks.SinhVien?.Email ?? "Không tìm thấy")</td>
                         <td>
                             <a asp-controller="SinhVien" asp-action="Details" asp-route-id="@ks.MaSinhVien"
-                               class="btn btn-sm btn-info">Chi tiết</a>
+                                class="btn btn-sm btn-info">Chi tiết</a>
+                            <button type="button" class="btn btn-sm btn-danger"
+                                onclick="confirmDeleteStudent('@ks.MaSinhVien', '@ks.SinhVien?.HoTen')">
+                                Xóa
+                            </button>
+                            <a class="btn btn-sm btn-warning"
+                                href="/DiemThi/Edit?maSinhVien=@ks.MaSinhVien&maKhoaHoc=@Model.MaKhoaHoc">
+                                Kết quả
+                            </a>
                         </td>
                     </tr>
                 }
@@ -161,7 +239,11 @@
                         <td>@(ks.Support?.LopSinhHoat ?? "Không tìm thấy")</td>
                         <td>
                             <a asp-controller="Support" asp-action="Details" asp-route-id="@ks.MaSupport"
-                               class="btn btn-sm btn-info">Chi tiết</a>
+                                class="btn btn-sm btn-info">Chi tiết</a>
+                            <button type="button" class="btn btn-sm btn-danger"
+                                onclick="confirmDeleteSupport('@ks.MaSupport', '@ks.Support?.HoTen')">
+                                Xóa
+                            </button>
                         </td>
                     </tr>
                 }
@@ -172,10 +254,103 @@
     {
         <p>Chưa có support nào cho khóa học này.</p>
     }
+
+    @if (userRole == "user" && Model.KhoaHoc_SinhVien != null && Model.KhoaHoc_SinhVien.Any(x => x.MaSinhVien ==
+        maSinhVien && x.TrangThai == "ChoDuyet"))
+    {
+        <h4 class="mt-4">Các đăng ký của bạn đang chờ duyệt</h4>
+        <table class="table table-warning">
+            <thead>
+                <tr>
+                    <th>Mã sinh viên</th>
+                    <th>Họ tên</th>
+                    <th>Lớp sinh hoạt</th>
+                    <th>Email</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ks in Model.KhoaHoc_SinhVien.Where(x => x.MaSinhVien == maSinhVien && x.TrangThai ==
+                            "ChoDuyet"))
+                {
+                    <tr>
+                        <td>@ks.MaSinhVien</td>
+                        <td>@(ks.SinhVien?.HoTen ?? "Không tìm thấy")</td>
+                        <td>@(ks.SinhVien?.LopSinhHoat ?? "Không tìm thấy")</td>
+                        <td>@(ks.SinhVien?.Email ?? "Không tìm thấy")</td>
+                        <td>Chờ duyệt</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>
 
 <div class="mt-3">
     <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+</div>
+
+<!-- Modal xác nhận xóa sinh viên -->
+<div class="modal fade" id="deleteStudentModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xóa sinh viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa sinh viên <span id="studentName"></span> khỏi khóa học này?</p>
+            </div>
+            <div class="modal-footer">
+                <form asp-action="RemoveStudent" asp-controller="KhoaHoc" method="post">
+                    <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
+                    <input type="hidden" name="MaSinhVien" id="deleteStudentId" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal xác nhận xóa support -->
+<div class="modal fade" id="deleteSupportModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xóa support</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa support <span id="supportName"></span> khỏi khóa học này?</p>
+            </div>
+            <div class="modal-footer">
+                <form asp-action="RemoveSupport" asp-controller="KhoaHoc" method="post">
+                    <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
+                    <input type="hidden" name="MaSupport" id="deleteSupportId" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal hiển thị kết quả sinh viên -->
+<div class="modal fade" id="ketQuaModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kết quả thi của <span id="ketQuaStudentName"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="ketQuaContent">
+                    <!-- Bảng điểm sẽ được load ở đây -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
@@ -224,5 +399,31 @@
                 $('#MaSupport').val('').trigger('change');
             });
         });
+
+        // Hàm xác nhận xóa sinh viên
+        function confirmDeleteStudent(maSinhVien, hoTen) {
+            $('#deleteStudentId').val(maSinhVien);
+            $('#studentName').text(hoTen);
+            var modal = new bootstrap.Modal(document.getElementById('deleteStudentModal'));
+            modal.show();
+        }
+
+        // Hàm xác nhận xóa support
+        function confirmDeleteSupport(maSupport, hoTen) {
+            $('#deleteSupportId').val(maSupport);
+            $('#supportName').text(hoTen);
+            var modal = new bootstrap.Modal(document.getElementById('deleteSupportModal'));
+            modal.show();
+        }
+
+        // Hàm hiển thị modal kết quả
+        function showKetQuaModal(maSinhVien, hoTen) {
+            $('#ketQuaStudentName').text(hoTen);
+            $.get('/DiemThi/GetBySinhVien', { maSinhVien: maSinhVien, maKhoaHoc: @Model.MaKhoaHoc }, function (data) {
+                $('#ketQuaContent').html(data);
+                var modal = new bootstrap.Modal(document.getElementById('ketQuaModal'));
+                modal.show();
+            });
+        }
     </script>
 }

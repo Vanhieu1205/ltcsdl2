@@ -5,11 +5,11 @@ namespace ClbTinhoc.Web.Models
 {
     public class KhoaHoc_SinhVien
     {
-        
+
         [Column(Order = 0)]
         public string MaSinhVien { get; set; }
 
-        
+
         [Column(Order = 1)]
         public int MaKhoaHoc { get; set; }
 
@@ -18,5 +18,8 @@ namespace ClbTinhoc.Web.Models
 
         [ForeignKey("MaKhoaHoc")]
         public virtual KhoaHoc KhoaHoc { get; set; }
+
+        // Trạng thái duyệt: ChoDuyet, DaDuyet, TuChoi
+        public string TrangThai { get; set; } = "ChoDuyet";
     }
 }

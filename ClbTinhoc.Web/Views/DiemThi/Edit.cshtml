@@ -1,11 +1,9 @@
-﻿@model ClbTinhoc.Web.Models.DiemThi
-
+@model ClbTinhoc.Web.Models.DiemThi
 @{
     ViewData["Title"] = "Nhập/Sửa điểm";
+    var lanThiList = ViewBag.LanThiList as List<ClbTinhoc.Web.Models.DiemThi>;
 }
-
 <h2>Nhập/Sửa điểm cho @ViewBag.TenSinhVien - Khóa: @ViewBag.TenKhoaHoc</h2>
-
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="MaSinhVien" />
     <input type="hidden" asp-for="MaKhoaHoc" />
@@ -22,6 +20,33 @@
     <button type="submit" class="btn btn-success">Lưu</button>
     <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
 </form>
+
+@if (lanThiList != null && lanThiList.Count > 0)
+{
+    <h4 class="mt-4">Các lần thi đã nhập</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Lần thi</th>
+                <th>Điểm</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lanThiList)
+            {
+                <tr>
+                    <td>@item.LanThi</td>
+                    <td>@item.Diem</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-maSinhVien="@item.MaSinhVien" asp-route-maKhoaHoc="@item.MaKhoaHoc"
+                            asp-route-lanThi="@item.LanThi" class="btn btn-sm btn-primary">Sửa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @section Scripts {
     @{

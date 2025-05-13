@@ -204,22 +204,27 @@ namespace ClbTinhoc.Web.Controllers
                 if (existing)
                 {
                     _logger.LogWarning($"SinhVien {MaSinhVien} already enrolled in KhoaHoc {MaKhoaHoc}.");
-                    TempData["Error"] = "Sinh viên đã tham gia khóa học này.";
+                    TempData["Error"] = "Sinh viên đã đăng ký hoặc đang chờ duyệt khóa học này.";
                     return RedirectToAction("Details", new { id = MaKhoaHoc });
                 }
 
+                var userRole = HttpContext.Session.GetString("UserRole");
                 var khoaHocSinhVien = new KhoaHoc_SinhVien
                 {
                     MaKhoaHoc = MaKhoaHoc,
-                    MaSinhVien = MaSinhVien
+                    MaSinhVien = MaSinhVien,
+                    TrangThai = userRole == "admin" ? "DaDuyet" : "ChoDuyet"
                 };
 
-                _logger.LogInformation($"Adding KhoaHoc_SinhVien: MaKhoaHoc={MaKhoaHoc}, MaSinhVien={MaSinhVien}");
+                _logger.LogInformation($"Adding KhoaHoc_SinhVien: MaKhoaHoc={MaKhoaHoc}, MaSinhVien={MaSinhVien}, TrangThai={khoaHocSinhVien.TrangThai}");
                 _context.KhoaHoc_SinhViens.Add(khoaHocSinhVien);
                 await _context.SaveChangesAsync();
 
                 _logger.LogInformation("KhoaHoc_SinhVien saved successfully.");
-                TempData["Success"] = "Đăng ký khóa học thành công.";
+                if (userRole == "admin")
+                    TempData["Success"] = "Đăng ký thành công!";
+                else
+                    TempData["Success"] = "Đăng ký thành công, vui lòng chờ admin duyệt.";
                 return RedirectToAction("Details", new { id = MaKhoaHoc });
             }
             catch (Exception ex)
@@ -419,6 +424,78 @@ namespace ClbTinhoc.Web.Controllers
         private bool KhoaHocExists(int id)
         {
             return _context.KhoaHoc.Any(e => e.MaKhoaHoc == id);
+        }
+
+        // XÓA SINH VIÊN KHỎI KHÓA HỌC
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveStudent(int MaKhoaHoc, string MaSinhVien)
+        {
+            var kh_sv = await _context.KhoaHoc_SinhViens
+                .FirstOrDefaultAsync(x => x.MaKhoaHoc == MaKhoaHoc && x.MaSinhVien == MaSinhVien);
+            if (kh_sv != null)
+            {
+                _context.KhoaHoc_SinhViens.Remove(kh_sv);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Đã xóa sinh viên khỏi khóa học.";
+            }
+            else
+            {
+                TempData["Error"] = "Không tìm thấy sinh viên trong khóa học.";
+            }
+            return RedirectToAction("Details", new { id = MaKhoaHoc });
+        }
+
+        // XÓA SUPPORT KHỎI KHÓA HỌC
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveSupport(int MaKhoaHoc, string MaSupport)
+        {
+            var kh_sp = await _context.SupportKhoaHoc
+                .FirstOrDefaultAsync(x => x.MaKhoaHoc == MaKhoaHoc && x.MaSupport == MaSupport);
+            if (kh_sp != null)
+            {
+                _context.SupportKhoaHoc.Remove(kh_sp);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Đã xóa support khỏi khóa học.";
+            }
+            else
+            {
+                TempData["Error"] = "Không tìm thấy support trong khóa học.";
+            }
+            return RedirectToAction("Details", new { id = MaKhoaHoc });
+        }
+
+        // DUYỆT SINH VIÊN
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApproveStudent(int MaKhoaHoc, string MaSinhVien)
+        {
+            var kh_sv = await _context.KhoaHoc_SinhViens
+                .FirstOrDefaultAsync(x => x.MaKhoaHoc == MaKhoaHoc && x.MaSinhVien == MaSinhVien);
+            if (kh_sv != null)
+            {
+                kh_sv.TrangThai = "DaDuyet";
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Đã duyệt sinh viên.";
+            }
+            return RedirectToAction("Details", new { id = MaKhoaHoc });
+        }
+
+        // TỪ CHỐI SINH VIÊN
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RejectStudent(int MaKhoaHoc, string MaSinhVien)
+        {
+            var kh_sv = await _context.KhoaHoc_SinhViens
+                .FirstOrDefaultAsync(x => x.MaKhoaHoc == MaKhoaHoc && x.MaSinhVien == MaSinhVien);
+            if (kh_sv != null)
+            {
+                kh_sv.TrangThai = "TuChoi";
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Đã từ chối sinh viên.";
+            }
+            return RedirectToAction("Details", new { id = MaKhoaHoc });
         }
     }
 }

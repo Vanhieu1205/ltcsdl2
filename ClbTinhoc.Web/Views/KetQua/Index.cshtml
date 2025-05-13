@@ -4,7 +4,9 @@
     ViewData["Title"] = "Danh sách kết quả";
     var userRole = Context.Session.GetString("UserRole");
 }
-
+<div class="container">
+    @await Html.PartialAsync("_Header")
+</div>
 <div class="container mt-4">
     <h1>Kết quả học tập</h1>
 
@@ -20,7 +22,7 @@
                 <th>Sinh viên</th>
                 <th>Lớp học</th>
                 <th>Điểm cuối kỳ</th>
-                <th>Ngày cập nhật</th>
+                
                 <th>Thao tác</th>
             </tr>
         </thead>
@@ -31,7 +33,7 @@
                     <td>@item.SinhVien?.HoTen</td>
                     <td>@item.KhoaHoc?.TenKhoaHoc</td>
                     <td>@item.DiemCuoiKy</td>
-                    <td>@item.NgayCapNhat.ToString("dd/MM/yyyy HH:mm")</td>
+                    
                     <td>
                         @if (userRole == "admin")
                         {

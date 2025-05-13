@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClbTinhoc.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3fa2d091a0000e5bac19642a7a7ed6c2e8750c1d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2cf7ec6aa8726f7dd14f8791905f377726d76df")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClbTinhoc.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClbTinhoc.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
