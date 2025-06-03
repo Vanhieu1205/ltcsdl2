@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-md-4">
             <img src="~/images/@Model.image" class="img-fluid rounded" alt="@Model.TenKhoaHoc"
-            onerror="this.src='/images/default-course.png'" />
+                onerror="this.src='/images/default-course.png'" />
         </div>
         <div class="col-md-8">
             <dl class="row">
@@ -74,7 +74,7 @@
                                 }
                             </select>
                             <button type="button" class="btn btn-outline-secondary"
-                            onclick="$('#MaSinhVien').select2('open');">
+                                onclick="$('#MaSinhVien').select2('open');">
                                 <i class="bi bi-caret-down-fill"></i>
                             </button>
                         </div>
@@ -106,7 +106,7 @@
                                 }
                             </select>
                             <button type="button" class="btn btn-outline-secondary"
-                            onclick="$('#MaSupport').select2('open');">
+                                onclick="$('#MaSupport').select2('open');">
                                 <i class="bi bi-caret-down-fill"></i>
                             </button>
                         </div>
@@ -126,7 +126,7 @@
 
     <h3 class="mt-4">Danh sách sinh viên chờ duyệt</h3>
     @if (Model.KhoaHoc_SinhVien != null && Model.KhoaHoc_SinhVien.Any(x => x.TrangThai ==
-      "ChoDuyet"))
+        "ChoDuyet"))
     {
         <table class="table table-warning">
             <thead>
@@ -149,7 +149,7 @@
                         <td>@(ks.SinhVien?.HoTen ?? "Không tìm thấy")</td>
                         <td>@(ks.SinhVien?.LopSinhHoat ?? "Không tìm thấy")</td>
                         <td>@(ks.SinhVien?.Email ?? "Không tìm thấy")</td>
-                        @if (userRole == "admin" )
+                        @if (userRole == "admin")
                         {
                             <td>
                                 <form asp-action="ApproveStudent" asp-controller="KhoaHoc" method="post" style="display:inline;">
@@ -199,10 +199,10 @@
                                 onclick="confirmDeleteStudent('@ks.MaSinhVien', '@ks.SinhVien?.HoTen')">
                                 Xóa
                             </button>
-                            <a class="btn btn-sm btn-warning"
-                                href="/DiemThi/Edit?maSinhVien=@ks.MaSinhVien&maKhoaHoc=@Model.MaKhoaHoc">
-                                Kết quả
-                            </a>
+                            <button type="button" class="btn btn-sm btn-primary"
+                                onclick="showNhapDiemModal('@ks.MaSinhVien', '@ks.SinhVien?.HoTen')">
+                                Nhập điểm
+                            </button>
                         </td>
                     </tr>
                 }
@@ -336,18 +336,31 @@
     </div>
 </div>
 
-<!-- Modal hiển thị kết quả sinh viên -->
-<div class="modal fade" id="ketQuaModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+<!-- Modal nhập điểm -->
+<div class="modal fade" id="nhapDiemModal" tabindex="-1">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Kết quả thi của <span id="ketQuaStudentName"></span></h5>
+                <h5 class="modal-title">Nhập điểm cuối kỳ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div id="ketQuaContent">
-                    <!-- Bảng điểm sẽ được load ở đây -->
-                </div>
+                <form id="nhapDiemForm" asp-action="NhapDiem" asp-controller="KetQua" method="post">
+                    <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
+                    <input type="hidden" name="MaSinhVien" id="nhapDiemMaSinhVien" />
+                    <div class="form-group">
+                        <label>Sinh viên: <span id="nhapDiemTenSinhVien"></span></label>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="DiemCuoiKy">Điểm cuối kỳ</label>
+                        <input type="number" class="form-control" id="DiemCuoiKy" name="DiemCuoiKy" step="0.1" min="0"
+                            max="10" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" onclick="submitNhapDiem()">Lưu điểm</button>
             </div>
         </div>
     </div>
@@ -416,13 +429,45 @@
             modal.show();
         }
 
-        // Hàm hiển thị modal kết quả
-        function showKetQuaModal(maSinhVien, hoTen) {
-            $('#ketQuaStudentName').text(hoTen);
-            $.get('/DiemThi/GetBySinhVien', { maSinhVien: maSinhVien, maKhoaHoc: @Model.MaKhoaHoc }, function (data) {
-                $('#ketQuaContent').html(data);
-                var modal = new bootstrap.Modal(document.getElementById('ketQuaModal'));
-                modal.show();
+        // Hàm hiển thị modal nhập điểm
+        function showNhapDiemModal(maSinhVien, hoTen) {
+            $('#nhapDiemMaSinhVien').val(maSinhVien);
+            $('#nhapDiemTenSinhVien').text(hoTen);
+
+            // Lấy điểm hiện tại nếu có
+            $.get('/KetQua/GetDiem', {
+                maSinhVien: maSinhVien,
+                maKhoaHoc: @Model.MaKhoaHoc
+                    }, function (data) {
+                if (data && data.diemCuoiKy) {
+                    $('#DiemCuoiKy').val(data.diemCuoiKy);
+                } else {
+                    $('#DiemCuoiKy').val('');
+                }
+            });
+
+            var modal = new bootstrap.Modal(document.getElementById('nhapDiemModal'));
+            modal.show();
+        }
+
+        // Hàm submit form nhập điểm
+        function submitNhapDiem() {
+            var form = $('#nhapDiemForm');
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: form.serialize(),
+                success: function (result) {
+                    if (result.success) {
+                        alert('Nhập điểm thành công!');
+                        location.reload();
+                    } else {
+                        alert('Có lỗi xảy ra: ' + result.message);
+                    }
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi nhập điểm!');
+                }
             });
         }
     </script>

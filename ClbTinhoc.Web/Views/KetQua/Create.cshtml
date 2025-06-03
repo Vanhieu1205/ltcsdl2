@@ -13,12 +13,12 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group mb-3">
                     <label asp-for="MaSinhVien" class="control-label">Sinh viên</label>
-                    <select asp-for="MaSinhVien" class="form-select" asp-items="ViewBag.MaSinhVien"></select>
+                    <select asp-for="MaSinhVien" class="form-select select2" asp-items="ViewBag.MaSinhVien"></select>
                     <span asp-validation-for="MaSinhVien" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="MaKhoaHoc" class="control-label">KhoaHoc</label>
-                    <select asp-for="MaKhoaHoc" class="form-select" asp-items="ViewBag.MaLopHoc"></select>
+                    <label asp-for="MaKhoaHoc" class="control-label">Khóa học</label>
+                    <select asp-for="MaKhoaHoc" class="form-select select2" asp-items="ViewBag.MaKhoaHoc"></select>
                     <span asp-validation-for="MaKhoaHoc" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
@@ -39,4 +39,15 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({
+                placeholder: "-- Chọn --",
+                allowClear: true,
+                width: '100%'
+            });
+        });
+    </script>
 }

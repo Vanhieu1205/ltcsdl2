@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\code\\hk2-nam3\\ltcsdltest\\LTCSDL_WEBCLB\\ClbTinhoc.Web\\ClbTinhoc.Web.csproj": {}
+    "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\ClbTinhoc.Web.csproj": {}
   },
   "projects": {
-    "D:\\code\\hk2-nam3\\ltcsdltest\\LTCSDL_WEBCLB\\ClbTinhoc.Web\\ClbTinhoc.Web.csproj": {
+    "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\ClbTinhoc.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\code\\hk2-nam3\\ltcsdltest\\LTCSDL_WEBCLB\\ClbTinhoc.Web\\ClbTinhoc.Web.csproj",
+        "projectUniqueName": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\ClbTinhoc.Web.csproj",
         "projectName": "ClbTinhoc.Web",
-        "projectPath": "D:\\code\\hk2-nam3\\ltcsdltest\\LTCSDL_WEBCLB\\ClbTinhoc.Web\\ClbTinhoc.Web.csproj",
+        "projectPath": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\ClbTinhoc.Web.csproj",
         "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\code\\hk2-nam3\\ltcsdltest\\LTCSDL_WEBCLB\\ClbTinhoc.Web\\obj\\",
+        "outputPath": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
