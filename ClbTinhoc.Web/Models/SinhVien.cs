@@ -12,7 +12,6 @@ namespace ClbTinhoc.Web.Models
         {
             KhoaHoc_SinhVien = new HashSet<KhoaHoc_SinhVien>();
             KetQuas = new HashSet<KetQua>();
-            DiemThis = new HashSet<DiemThi>();
         }
 
         [Key]
@@ -55,6 +54,5 @@ namespace ClbTinhoc.Web.Models
         // Navigation properties
         public virtual ICollection<KhoaHoc_SinhVien> KhoaHoc_SinhVien { get; set; }
         public virtual ICollection<KetQua> KetQuas { get; set; }
-        public virtual ICollection<DiemThi> DiemThis { get; set; }
     }
 }

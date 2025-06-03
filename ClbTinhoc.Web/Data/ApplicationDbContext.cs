@@ -16,7 +16,6 @@ namespace ClbTinhoc.Web.Data
         public DbSet<KetQua> KetQua { get; set; }
         public DbSet<KhoaHoc_SinhVien> KhoaHoc_SinhViens { get; set; }
         public DbSet<SupportKhoaHoc> SupportKhoaHoc { get; set; }
-        public DbSet<DiemThi> DiemThi { get; set; }
         public DbSet<UserLogin> UserLogin { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,7 +45,6 @@ namespace ClbTinhoc.Web.Data
             //            .WithMany()
             //            .HasForeignKey(l => l.MaKhoaHoc);
             modelBuilder.Entity<KetQua>().HasKey(k => k.MaKetQua);
-            modelBuilder.Entity<DiemThi>().HasKey(d => d.MaDiem);
             modelBuilder.Entity<UserLogin>().HasKey(u => u.Id);
 
             // Cấu hình khóa chính cho các bảng liên kết
@@ -63,7 +61,6 @@ namespace ClbTinhoc.Web.Data
             modelBuilder.Entity<KetQua>().ToTable("ketqua");
             modelBuilder.Entity<KhoaHoc_SinhVien>().ToTable("student_khoahoc");
             modelBuilder.Entity<SupportKhoaHoc>().ToTable("support_khoahoc");
-            modelBuilder.Entity<DiemThi>().ToTable("diemthi");
             modelBuilder.Entity<UserLogin>().ToTable("user_login");
 
 
