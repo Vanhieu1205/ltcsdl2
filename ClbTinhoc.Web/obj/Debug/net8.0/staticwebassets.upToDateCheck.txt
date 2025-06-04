@@ -10,6 +10,7 @@ wwwroot\favicon.ico
 wwwroot\images\03thxbm0.jpg
 wwwroot\images\1293436.jpg
 wwwroot\images\4im1lih1.jpg
+wwwroot\images\absgypk2.jpg
 wwwroot\images\axbsetu3.jpg
 wwwroot\images\background.png
 wwwroot\images\BG1.jpg
@@ -54,6 +55,7 @@ wwwroot\images\image8.jpg
 wwwroot\images\image9.jpg
 wwwroot\images\j0jov4ne.jpg
 wwwroot\images\java.png
+wwwroot\images\jerg2ez5.jpg
 wwwroot\images\js.jpg
 wwwroot\images\khoahocC.png
 wwwroot\images\kxm1xsto.png
@@ -64,6 +66,7 @@ wwwroot\images\plnzurre.jpg
 wwwroot\images\python.png
 wwwroot\images\react.png
 wwwroot\images\test.jpg
+wwwroot\images\test1.png
 wwwroot\images\v03y1pjo.png
 wwwroot\images\xzwb2kzm.jpg
 wwwroot\js\site.js

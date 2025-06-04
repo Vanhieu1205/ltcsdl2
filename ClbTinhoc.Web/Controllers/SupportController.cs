@@ -30,6 +30,34 @@ namespace ClbTinhoc.Web.Controllers
             return View(supports);
         }
 
+        // GET: Support/Search
+        public async Task<IActionResult> Search(string searchString)
+        {
+            try
+            {
+                _logger.LogInformation($"Đang tìm kiếm support với từ khóa: {searchString}");
+                var supports = from s in _context.Support
+                               select s;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    supports = supports.Where(s => s.HoTen.Contains(searchString) ||
+                                                s.MaSupport.Contains(searchString) ||
+                                                s.LopSinhHoat.Contains(searchString) ||
+                                                s.Email.Contains(searchString));
+                }
+
+                var result = await supports.ToListAsync();
+                _logger.LogInformation($"Tìm thấy {result.Count} support");
+                return View("Index", result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi tìm kiếm support");
+                return View("Index", new List<Support>());
+            }
+        }
+
         // GET: Support/Create
         public IActionResult Create()
         {

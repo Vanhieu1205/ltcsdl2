@@ -29,6 +29,21 @@ namespace ClbTinhoc.Web.Controllers
             return View(await _context.KhoaHoc.ToListAsync());
         }
 
+        // GET: KhoaHoc/Search
+        public async Task<IActionResult> Search(string searchString)
+        {
+            var khoaHoc = from k in _context.KhoaHoc
+                          select k;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                khoaHoc = khoaHoc.Where(k => k.TenKhoaHoc.Contains(searchString) ||
+                                            k.MoTa.Contains(searchString));
+            }
+
+            return View("Index", await khoaHoc.ToListAsync());
+        }
+
         // GET: KhoaHoc/Create
         public IActionResult Create()
         {

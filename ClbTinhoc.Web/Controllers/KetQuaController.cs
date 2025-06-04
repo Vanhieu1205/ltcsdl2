@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using ClbTinhoc.Web.Attributes;
+using Microsoft.Extensions.Logging;
 
 namespace ClbTinhoc.Web.Controllers
 {
@@ -14,10 +15,12 @@ namespace ClbTinhoc.Web.Controllers
     public class KetQuaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<KetQuaController> _logger;
 
-        public KetQuaController(ApplicationDbContext context)
+        public KetQuaController(ApplicationDbContext context, ILogger<KetQuaController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: KetQua
@@ -28,6 +31,37 @@ namespace ClbTinhoc.Web.Controllers
                 .Include(k => k.KhoaHoc)
                 .ToListAsync();
             return View(ketQuas);
+        }
+
+        // GET: KetQua/Search
+        public async Task<IActionResult> Search(string searchString)
+        {
+            try
+            {
+                _logger.LogInformation($"Đang tìm kiếm kết quả với từ khóa: {searchString}");
+                var ketQuas = _context.KetQua
+                    .Include(k => k.SinhVien)
+                    .Include(k => k.KhoaHoc)
+                    .AsQueryable();
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    ketQuas = ketQuas.Where(k =>
+                        k.SinhVien.HoTen.Contains(searchString) ||
+                        k.SinhVien.MaSinhVien.Contains(searchString) ||
+                        k.KhoaHoc.TenKhoaHoc.Contains(searchString) ||
+                        k.DiemCuoiKy.ToString().Contains(searchString));
+                }
+
+                var result = await ketQuas.ToListAsync();
+                _logger.LogInformation($"Tìm thấy {result.Count} kết quả");
+                return View("Index", result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi tìm kiếm kết quả");
+                return View("Index", new List<KetQua>());
+            }
         }
 
         // GET: KetQua/Details/5
@@ -118,8 +152,11 @@ namespace ClbTinhoc.Web.Controllers
             }
 
             // Remove validation for MaSinhVien and MaKhoaHoc as they are disabled and fetched from DB
+            // Also remove validation for navigation properties if they somehow still have [Required]
             ModelState.Remove("MaSinhVien");
             ModelState.Remove("MaKhoaHoc");
+            ModelState.Remove("SinhVien");
+            ModelState.Remove("KhoaHoc");
 
             // Manually validate DiemCuoiKy
             if (ketQua.DiemCuoiKy < 0 || ketQua.DiemCuoiKy > 10)
@@ -168,6 +205,13 @@ namespace ClbTinhoc.Web.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            // Log ModelState errors
+            var errors = ModelState.Where(m => m.Value.Errors.Any());
+            foreach (var error in errors)
+            {
+                _logger.LogError($"ModelState error for {error.Key}: {string.Join("; ", error.Value.Errors.Select(e => e.ErrorMessage))}");
+            }
+
             var modelForView = await _context.KetQua
                 .Include(k => k.SinhVien)
                 .Include(k => k.KhoaHoc)

@@ -10,12 +10,9 @@ namespace ClbTinhoc.Web.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MaKetQua { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn sinh viên")]
-        [Display(Name = "Sinh viên")]
+
         public string MaSinhVien { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn khóa học")]
-        [Display(Name = "Khóa học")]
         public int MaKhoaHoc { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập điểm cuối kỳ")]

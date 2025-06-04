@@ -65,6 +65,10 @@
       "PackagePath": "staticwebassets\\images\\Logo.png"
     },
     {
+      "Id": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\absgypk2.jpg",
+      "PackagePath": "staticwebassets\\images\\absgypk2.jpg"
+    },
+    {
       "Id": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\axbsetu3.jpg",
       "PackagePath": "staticwebassets\\images\\axbsetu3.jpg"
     },
@@ -233,6 +237,10 @@
       "PackagePath": "staticwebassets\\images\\java.png"
     },
     {
+      "Id": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\jerg2ez5.jpg",
+      "PackagePath": "staticwebassets\\images\\jerg2ez5.jpg"
+    },
+    {
       "Id": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\js.jpg",
       "PackagePath": "staticwebassets\\images\\js.jpg"
     },
@@ -267,6 +275,10 @@
     {
       "Id": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\test.jpg",
       "PackagePath": "staticwebassets\\images\\test.jpg"
+    },
+    {
+      "Id": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\test1.png",
+      "PackagePath": "staticwebassets\\images\\test1.png"
     },
     {
       "Id": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\v03y1pjo.png",

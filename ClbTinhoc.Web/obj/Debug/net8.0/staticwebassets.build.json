@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JePk8Z1diAeDwVVYQ3otMWa96xfVSLhW5wu5LRWyDPk=",
+  "Hash": "8U5FYM4bW0WchkTtsus9JeHlkxE/RqglEuXwSW9LVaM=",
   "Source": "ClbTinhoc.Web",
   "BasePath": "_content/ClbTinhoc.Web",
   "Mode": "Default",
@@ -1571,6 +1571,27 @@
       "OriginalItemSpec": "wwwroot\\images\\4im1lih1.jpg"
     },
     {
+      "Identity": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\absgypk2.jpg",
+      "SourceId": "ClbTinhoc.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\",
+      "BasePath": "_content/ClbTinhoc.Web",
+      "RelativePath": "images/absgypk2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "pufpqn7qgu",
+      "Integrity": "f926wKz0x9rQSOeblmE3X0IfQOqbCYusGSUQcp4mGyg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\absgypk2.jpg"
+    },
+    {
       "Identity": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\axbsetu3.jpg",
       "SourceId": "ClbTinhoc.Web",
       "SourceType": "Discovered",
@@ -2495,6 +2516,27 @@
       "OriginalItemSpec": "wwwroot\\images\\java.png"
     },
     {
+      "Identity": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\jerg2ez5.jpg",
+      "SourceId": "ClbTinhoc.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\",
+      "BasePath": "_content/ClbTinhoc.Web",
+      "RelativePath": "images/jerg2ez5#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "t3oqrzajjx",
+      "Integrity": "dzz4NyrIVlGzdoRaF8HxQtdhu4vzz2s0jWg4f/HmPmo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\jerg2ez5.jpg"
+    },
+    {
       "Identity": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\js.jpg",
       "SourceId": "ClbTinhoc.Web",
       "SourceType": "Discovered",
@@ -2703,6 +2745,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\test.jpg"
+    },
+    {
+      "Identity": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\test1.png",
+      "SourceId": "ClbTinhoc.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\",
+      "BasePath": "_content/ClbTinhoc.Web",
+      "RelativePath": "images/test1#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0he3dk2unw",
+      "Integrity": "/PaaebbILKy1pMxSdu5UEenZBeQiFIG7qBIR+mcRAWk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\test1.png"
     },
     {
       "Identity": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\v03y1pjo.png",
@@ -3989,7 +4052,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
+          "Value": "Wed, 04 Jun 2025 15:43:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4026,7 +4089,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
+          "Value": "Wed, 04 Jun 2025 15:43:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4071,7 +4134,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
+          "Value": "Wed, 04 Jun 2025 15:43:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4116,7 +4179,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
+          "Value": "Wed, 04 Jun 2025 15:43:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7331,6 +7394,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-bOC0gAXoWmx1z53VRVlI2GaYJqgJqniCNzVLAwmG4E8="
+        }
+      ]
+    },
+    {
+      "Route": "images/absgypk2.jpg",
+      "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\absgypk2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6643"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f926wKz0x9rQSOeblmE3X0IfQOqbCYusGSUQcp4mGyg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 15:14:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-f926wKz0x9rQSOeblmE3X0IfQOqbCYusGSUQcp4mGyg="
+        }
+      ]
+    },
+    {
+      "Route": "images/absgypk2.pufpqn7qgu.jpg",
+      "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\absgypk2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6643"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f926wKz0x9rQSOeblmE3X0IfQOqbCYusGSUQcp4mGyg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 15:14:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "pufpqn7qgu"
+        },
+        {
+          "Name": "label",
+          "Value": "images/absgypk2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-f926wKz0x9rQSOeblmE3X0IfQOqbCYusGSUQcp4mGyg="
         }
       ]
     },
@@ -10943,6 +11088,88 @@
       ]
     },
     {
+      "Route": "images/jerg2ez5.jpg",
+      "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\jerg2ez5.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11918"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dzz4NyrIVlGzdoRaF8HxQtdhu4vzz2s0jWg4f/HmPmo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 15:14:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dzz4NyrIVlGzdoRaF8HxQtdhu4vzz2s0jWg4f/HmPmo="
+        }
+      ]
+    },
+    {
+      "Route": "images/jerg2ez5.t3oqrzajjx.jpg",
+      "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\jerg2ez5.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11918"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dzz4NyrIVlGzdoRaF8HxQtdhu4vzz2s0jWg4f/HmPmo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 15:14:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t3oqrzajjx"
+        },
+        {
+          "Name": "label",
+          "Value": "images/jerg2ez5.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dzz4NyrIVlGzdoRaF8HxQtdhu4vzz2s0jWg4f/HmPmo="
+        }
+      ]
+    },
+    {
       "Route": "images/js.jpg",
       "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\js.jpg",
       "Selectors": [],
@@ -11759,6 +11986,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-VnyPgMVlbcLBZoVfqJLHKMfb0p1ywfCreo+5GeEJVCI="
+        }
+      ]
+    },
+    {
+      "Route": "images/test1.0he3dk2unw.png",
+      "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\test1.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2183"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/PaaebbILKy1pMxSdu5UEenZBeQiFIG7qBIR+mcRAWk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 15:14:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0he3dk2unw"
+        },
+        {
+          "Name": "label",
+          "Value": "images/test1.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/PaaebbILKy1pMxSdu5UEenZBeQiFIG7qBIR+mcRAWk="
+        }
+      ]
+    },
+    {
+      "Route": "images/test1.png",
+      "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\test1.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2183"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/PaaebbILKy1pMxSdu5UEenZBeQiFIG7qBIR+mcRAWk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 15:14:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/PaaebbILKy1pMxSdu5UEenZBeQiFIG7qBIR+mcRAWk="
         }
       ]
     },

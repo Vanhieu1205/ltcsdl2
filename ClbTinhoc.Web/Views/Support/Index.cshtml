@@ -84,12 +84,26 @@
 <div class="container mt-4">
     <h1 class="text-center">Danh sách Support</h1>
 
-    <p class="text-center">
-        @if (userRole == "admin")
-        {
-            <a asp-action="Create" class="btn btn-success">Thêm mới</a>
-        }
-    </p>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form asp-action="Search" method="get" class="form-inline">
+                <div class="input-group">
+                    <input type="text" name="searchString" class="form-control" placeholder="Tìm kiếm support...">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Tìm kiếm
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 text-right">
+            @if (userRole == "admin")
+            {
+                <a asp-action="Create" class="btn btn-success">Thêm mới</a>
+            }
+        </div>
+    </div>
 
     <div class="row">
         @foreach (var item in Model)
@@ -115,7 +129,7 @@
                                 <a asp-action="Edit" asp-route-id="@item.MaSupport" class="btn btn-sm btn-warning">Sửa</a>
                                 <a asp-action="Delete" asp-route-id="@item.MaSupport" class="btn btn-sm btn-danger">Xóa</a>
                             }
-                            
+
                         </div>
                     </div>
                 </div>

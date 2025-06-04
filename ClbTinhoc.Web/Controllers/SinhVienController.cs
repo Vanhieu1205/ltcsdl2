@@ -39,6 +39,34 @@ namespace ClbTinhoc.Web.Controllers
             }
         }
 
+        // GET: SinhVien/Search
+        public async Task<IActionResult> Search(string searchString)
+        {
+            try
+            {
+                _logger.LogInformation($"Đang tìm kiếm sinh viên với từ khóa: {searchString}");
+                var sinhViens = from s in _context.SinhVien
+                                select s;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    sinhViens = sinhViens.Where(s => s.HoTen.Contains(searchString) ||
+                                                   s.MaSinhVien.Contains(searchString) ||
+                                                   s.LopSinhHoat.Contains(searchString) ||
+                                                   s.Email.Contains(searchString));
+                }
+
+                var result = await sinhViens.ToListAsync();
+                _logger.LogInformation($"Tìm thấy {result.Count} sinh viên");
+                return View("Index", result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi tìm kiếm sinh viên");
+                return View("Index", new List<SinhVien>());
+            }
+        }
+
         // GET: SinhVien/Create
         public IActionResult Create()
         {
