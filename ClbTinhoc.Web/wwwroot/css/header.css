@@ -9,68 +9,92 @@ header {
     border-radius: 10px;
 }
 
-    /* Căn chỉnh container */
-    header .container {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: space-between;
-        align-items: center;
-        width: 95%;
-        max-width: 1200px;
-        margin: 0 auto;
-        height: 80px;
-    }
+/* Căn chỉnh container */
+header .container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    height: 80px;
+}
 
-    /* Logo Styling */
-    header .logo img {
-        height: 80px;
-        width: auto;
-        border-radius: 8px;
-    }
+/* Logo Styling */
+header .logo img {
+    height: 80px;
+    width: auto;
+    border-radius: 8px;
+}
 
-    /* Navigation Menu */
-    header .navbar-nav {
-        display: flex;
-        flex-direction: row !important; /* Đảm bảo hiển thị ngang */
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-    }
+/* Navigation Menu */
+header .navbar-nav {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
 
-        /* Menu Items - Chỉnh màu trắng */
-        header .navbar-nav .nav-link {
-            color: white !important; /* Đảm bảo màu trắng */
-            font-size: 20px;
-            font-weight: bold;
-            padding: 10px 15px;
-            text-transform: uppercase;
-        }
+/* Menu Items - Chỉnh màu trắng */
+header .navbar-nav .nav-link {
+    color: white !important;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-transform: uppercase;
+}
 
-            /* Hiệu ứng hover */
-            header .navbar-nav .nav-link:hover {
-                color: #ffd700 !important; /* Màu vàng khi hover */
-            }
+/* Hiệu ứng hover */
+header .navbar-nav .nav-link:hover {
+    color: #ffd700 !important;
+}
 
-    /* User Info Section */
-    header .user-info-container {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center;
-        gap: 20px;
-        font-size: 16px;
-    }
-    /* Nút đăng nhập */
-    header .btn-primary {
-        font-size: 16px;
-        font-weight: bold;
-        padding: 8px 15px;
-    }
+/* User Info Section */
+header .user-info-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 20px;
+    font-size: 16px;
+}
 
-/* Responsive Header */
+/* Nút đăng nhập */
+header .btn-primary {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 15px;
+}
+
 /* Responsive Header */
 @media (max-width: 1024px) {
     header .container {
         padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    header .logo img {
+        height: 70px;
+    }
+
+    header .navbar-nav {
+        gap: 20px;
+    }
+
+    header .navbar-nav .nav-link {
+        font-size: 18px;
+        padding: 8px 10px;
+    }
+
+    header .user-info-container {
+        gap: 15px;
+        font-size: 14px;
+    }
+
+    header .btn-primary {
+        font-size: 14px;
+        padding: 6px 12px;
     }
 }
 
@@ -79,42 +103,80 @@ header {
     header .container {
         flex-direction: column !important;
         height: auto;
-        padding: 15px 0;
+        padding: 15px;
+        align-items: center;
+        width: 100%;
+    }
+
+    header .logo img {
+        height: 60px;
+        margin-bottom: 15px;
     }
 
     header .navbar-nav {
         flex-direction: column !important;
         gap: 10px;
-        margin: 15px 0;
+        margin: 0;
+        width: 100%;
+        align-items: center;
+    }
+
+    header .navbar-nav .nav-item {
+        width: 100%;
+        text-align: center;
     }
 
     header .user-info-container {
         flex-direction: column !important;
         gap: 10px;
+        margin-top: 15px;
+        width: 100%;
+        align-items: center;
+    }
+
+    header .user-info span {
+        text-align: center;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    header .btn-primary {
+        width: auto;
+        margin: 5px 0;
     }
 }
 
 /* Mobile View (max-width: 480px) */
 @media (max-width: 480px) {
+    header {
+        padding: 10px 5px;
+        border-radius: 5px;
+    }
+
     header .container {
-        padding: 10px 0;
+        padding: 10px;
     }
 
     header .logo img {
-        height: 60px;
+        height: 50px;
+    }
+
+    header .navbar-nav {
+        gap: 8px;
     }
 
     header .navbar-nav .nav-link {
-        font-size: 14px;
+        font-size: 12px;
+        padding: 5px 8px;
     }
 
-    header .user-info img {
-        height: 25px;
-        width: 25px;
+    header .user-info-container {
+        gap: 8px;
+        font-size: 12px;
     }
 
     header .btn-primary {
-        font-size: 12px;
-        padding: 5px 10px;
+        font-size: 10px;
+        padding: 4px 8px;
     }
 }

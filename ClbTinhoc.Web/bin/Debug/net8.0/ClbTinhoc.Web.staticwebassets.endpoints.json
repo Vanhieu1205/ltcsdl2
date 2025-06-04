@@ -3,7 +3,7 @@
   "ManifestType": "Build",
   "Endpoints": [
     {
-      "Route": "ClbTinhoc.Web.gssr9h9fvq.styles.css",
+      "Route": "ClbTinhoc.Web.d5mgs9iewo.styles.css",
       "AssetFile": "ClbTinhoc.Web.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -17,7 +17,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1131"
+          "Value": "2151"
         },
         {
           "Name": "Content-Type",
@@ -25,21 +25,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U=\""
+          "Value": "\"3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 18:43:53 GMT"
+          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "gssr9h9fvq"
+          "Value": "d5mgs9iewo"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U="
+          "Value": "sha256-3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk="
         },
         {
           "Name": "label",
@@ -62,7 +62,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1131"
+          "Value": "2151"
         },
         {
           "Name": "Content-Type",
@@ -70,17 +70,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U=\""
+          "Value": "\"3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 18:43:53 GMT"
+          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U="
+          "Value": "sha256-3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk="
         }
       ]
     },
@@ -2319,7 +2319,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2777"
+          "Value": "3535"
         },
         {
           "Name": "Content-Type",
@@ -2327,22 +2327,22 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zJPpS465qGILX3r0iZTwhDIwea1KmshXWAkbzyi93fc=\""
+          "Value": "\"2abzQW/KNe92XwsLTVaPR9PKy70jSK9zRU1KIMSifko=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 17:44:42 GMT"
+          "Value": "Tue, 03 Jun 2025 19:08:12 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-zJPpS465qGILX3r0iZTwhDIwea1KmshXWAkbzyi93fc="
+          "Value": "sha256-2abzQW/KNe92XwsLTVaPR9PKy70jSK9zRU1KIMSifko="
         }
       ]
     },
     {
-      "Route": "css/header.cstcm33qpp.css",
+      "Route": "css/header.dbc6b2rlug.css",
       "AssetFile": "css/header.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2356,7 +2356,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2777"
+          "Value": "3535"
         },
         {
           "Name": "Content-Type",
@@ -2364,21 +2364,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zJPpS465qGILX3r0iZTwhDIwea1KmshXWAkbzyi93fc=\""
+          "Value": "\"2abzQW/KNe92XwsLTVaPR9PKy70jSK9zRU1KIMSifko=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 17:44:42 GMT"
+          "Value": "Tue, 03 Jun 2025 19:08:12 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "cstcm33qpp"
+          "Value": "dbc6b2rlug"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-zJPpS465qGILX3r0iZTwhDIwea1KmshXWAkbzyi93fc="
+          "Value": "sha256-2abzQW/KNe92XwsLTVaPR9PKy70jSK9zRU1KIMSifko="
         },
         {
           "Name": "label",

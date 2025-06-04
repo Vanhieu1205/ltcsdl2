@@ -9,22 +9,26 @@
                 <a class="nav-link" href="@Url.Action("Index", "Home")">TRANG CHỦ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "KhoaHoc") : Url.Action("Login", "Account"))">
+                <a class="nav-link"
+                    href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "KhoaHoc") : Url.Action("Login", "Account"))">
                     KHÓA HỌC
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "Support") : Url.Action("Login", "Account"))">
+                <a class="nav-link"
+                    href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "Support") : Url.Action("Login", "Account"))">
                     Support
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "SinhVien") : Url.Action("Login", "Account"))">
+                <a class="nav-link"
+                    href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "SinhVien") : Url.Action("Login", "Account"))">
                     SINH VIÊN
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "KetQua") : Url.Action("Login", "Account"))">
+                <a class="nav-link"
+                    href="@(Context.Session.GetString("Username") != null ? Url.Action("Index", "KetQua") : Url.Action("Login", "Account"))">
                     Kết Quả
                 </a>
             </li>

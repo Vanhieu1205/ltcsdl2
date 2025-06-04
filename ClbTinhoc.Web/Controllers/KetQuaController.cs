@@ -84,7 +84,11 @@ namespace ClbTinhoc.Web.Controllers
                 return NotFound();
             }
 
-            var ketQua = await _context.KetQua.FindAsync(id);
+            var ketQua = await _context.KetQua
+                .Include(k => k.SinhVien)
+                .Include(k => k.KhoaHoc)
+                .FirstOrDefaultAsync(m => m.MaKetQua == id);
+
             if (ketQua == null)
             {
                 return NotFound();
@@ -98,61 +102,87 @@ namespace ClbTinhoc.Web.Controllers
         // POST: KetQua/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, KetQua ketQuaInput)
+        public async Task<IActionResult> Edit(int id, [Bind("MaKetQua,MaSinhVien,MaKhoaHoc,DiemCuoiKy")] KetQua ketQua)
         {
-            if (id != ketQuaInput.MaKetQua)
+            // Check if user is admin
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "admin")
             {
-                return Json(new { success = false, message = "Không tìm thấy kết quả" });
+                TempData["ErrorMessage"] = "Bạn không có quyền sửa điểm!";
+                return RedirectToAction(nameof(Index));
             }
 
-            var existingKetQua = await _context.KetQua.FindAsync(id);
-            if (existingKetQua == null)
+            if (id != ketQua.MaKetQua)
             {
-                return Json(new { success = false, message = "Không tìm thấy kết quả" });
+                return NotFound();
             }
 
-            // Safely parse DiemCuoiKy from form data and assign to model
-            if (double.TryParse(Request.Form["DiemCuoiKy"], System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double diemCuoiKy))
+            // Remove validation for MaSinhVien and MaKhoaHoc as they are disabled and fetched from DB
+            ModelState.Remove("MaSinhVien");
+            ModelState.Remove("MaKhoaHoc");
+
+            // Manually validate DiemCuoiKy
+            if (ketQua.DiemCuoiKy < 0 || ketQua.DiemCuoiKy > 10)
             {
-                ketQuaInput.DiemCuoiKy = diemCuoiKy;
-            }
-            else
-            {
-                ModelState.AddModelError("DiemCuoiKy", "Điểm cuối kỳ không hợp lệ.");
+                ModelState.AddModelError("DiemCuoiKy", "Điểm cuối kỳ phải từ 0 đến 10.");
             }
 
-            // Update existing entity with values from the input model
             if (ModelState.IsValid)
             {
                 try
                 {
-                    existingKetQua.MaSinhVien = ketQuaInput.MaSinhVien;
-                    existingKetQua.MaKhoaHoc = ketQuaInput.MaKhoaHoc;
-                    existingKetQua.DiemCuoiKy = ketQuaInput.DiemCuoiKy; // Use the parsed value
+                    var existingKetQua = await _context.KetQua.FindAsync(id);
+                    if (existingKetQua == null)
+                    {
+                        TempData["ErrorMessage"] = "Không tìm thấy kết quả học tập!";
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    // Update only the DiemCuoiKy and NgayCapNhat properties
+                    existingKetQua.DiemCuoiKy = ketQua.DiemCuoiKy;
                     existingKetQua.NgayCapNhat = DateTime.Now;
 
                     _context.Update(existingKetQua);
                     await _context.SaveChangesAsync();
-                    return Json(new { success = true });
+                    TempData["SuccessMessage"] = "Cập nhật kết quả thành công!";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KetQuaExists(ketQuaInput.MaKetQua))
+                    if (!KetQuaExists(ketQua.MaKetQua))
                     {
-                        return Json(new { success = false, message = "Không tìm thấy kết quả" });
+                        TempData["ErrorMessage"] = "Không tìm thấy kết quả học tập!";
+                        return RedirectToAction(nameof(Index));
                     }
                     else
                     {
-                        return Json(new { success = false, message = "Có lỗi xảy ra khi cập nhật" });
+                        TempData["ErrorMessage"] = "Có lỗi xảy ra khi cập nhật kết quả!";
+                        return RedirectToAction(nameof(Index));
                     }
+                }
+                catch (Exception ex)
+                {
+                    TempData["ErrorMessage"] = "Có lỗi xảy ra: " + ex.Message;
+                    return RedirectToAction(nameof(Index));
                 }
             }
 
-            var errors = ModelState.ToDictionary(
-                kvp => kvp.Key,
-                kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToList()
-            );
-            return Json(new { success = false, message = "Dữ liệu không hợp lệ", errors = errors });
+            // If we got this far, something failed, redisplay form
+            var modelForView = await _context.KetQua
+                .Include(k => k.SinhVien)
+                .Include(k => k.KhoaHoc)
+                .FirstOrDefaultAsync(m => m.MaKetQua == id);
+
+            if (modelForView == null)
+            {
+                TempData["ErrorMessage"] = "Không tìm thấy kết quả học tập!";
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Update the DiemCuoiKy on the model sent to the view
+            modelForView.DiemCuoiKy = ketQua.DiemCuoiKy;
+
+            return View(modelForView);
         }
 
         // GET: KetQua/Delete/5

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7HiXQo1/H2f23O+Ihyn26JBuW5DEAiKnQMNxVZjEwZs=",
+  "Hash": "JePk8Z1diAeDwVVYQ3otMWa96xfVSLhW5wu5LRWyDPk=",
   "Source": "ClbTinhoc.Web",
   "BasePath": "_content/ClbTinhoc.Web",
   "Mode": "Default",
@@ -1291,8 +1291,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "gssr9h9fvq",
-      "Integrity": "gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U=",
+      "Fingerprint": "d5mgs9iewo",
+      "Integrity": "3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ClbTinhoc.Web.styles.css"
@@ -1312,8 +1312,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "gssr9h9fvq",
-      "Integrity": "gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U=",
+      "Fingerprint": "d5mgs9iewo",
+      "Integrity": "3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ClbTinhoc.Web.bundle.scp.css"
@@ -1333,8 +1333,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "cstcm33qpp",
-      "Integrity": "zJPpS465qGILX3r0iZTwhDIwea1KmshXWAkbzyi93fc=",
+      "Fingerprint": "dbc6b2rlug",
+      "Integrity": "2abzQW/KNe92XwsLTVaPR9PKy70jSK9zRU1KIMSifko=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\header.css"
@@ -3977,7 +3977,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1131"
+          "Value": "2151"
         },
         {
           "Name": "Content-Type",
@@ -3985,11 +3985,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U=\""
+          "Value": "\"3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 18:43:53 GMT"
+          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3999,12 +3999,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U="
+          "Value": "sha256-3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk="
         }
       ]
     },
     {
-      "Route": "ClbTinhoc.Web.gssr9h9fvq.bundle.scp.css",
+      "Route": "ClbTinhoc.Web.d5mgs9iewo.bundle.scp.css",
       "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ClbTinhoc.Web.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4014,7 +4014,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1131"
+          "Value": "2151"
         },
         {
           "Name": "Content-Type",
@@ -4022,11 +4022,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U=\""
+          "Value": "\"3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 18:43:53 GMT"
+          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4036,7 +4036,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "gssr9h9fvq"
+          "Value": "d5mgs9iewo"
         },
         {
           "Name": "label",
@@ -4044,12 +4044,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U="
+          "Value": "sha256-3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk="
         }
       ]
     },
     {
-      "Route": "ClbTinhoc.Web.gssr9h9fvq.styles.css",
+      "Route": "ClbTinhoc.Web.d5mgs9iewo.styles.css",
       "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ClbTinhoc.Web.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4059,7 +4059,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1131"
+          "Value": "2151"
         },
         {
           "Name": "Content-Type",
@@ -4067,11 +4067,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U=\""
+          "Value": "\"3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 18:43:53 GMT"
+          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4081,7 +4081,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "gssr9h9fvq"
+          "Value": "d5mgs9iewo"
         },
         {
           "Name": "label",
@@ -4089,7 +4089,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U="
+          "Value": "sha256-3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk="
         }
       ]
     },
@@ -4104,7 +4104,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1131"
+          "Value": "2151"
         },
         {
           "Name": "Content-Type",
@@ -4112,11 +4112,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U=\""
+          "Value": "\"3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 18:43:53 GMT"
+          "Value": "Wed, 04 Jun 2025 15:13:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4126,7 +4126,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-gFjMueEmh+jTpp79+yff6EJaMn4jAeX2gs7jtua2c3U="
+          "Value": "sha256-3ytw5r59sE+RrJKuEnThLPR+GfUNVxCy9GmXF1p8Rdk="
         }
       ]
     },
@@ -4141,7 +4141,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2777"
+          "Value": "3535"
         },
         {
           "Name": "Content-Type",
@@ -4149,11 +4149,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zJPpS465qGILX3r0iZTwhDIwea1KmshXWAkbzyi93fc=\""
+          "Value": "\"2abzQW/KNe92XwsLTVaPR9PKy70jSK9zRU1KIMSifko=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 17:44:42 GMT"
+          "Value": "Tue, 03 Jun 2025 19:08:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4163,12 +4163,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-zJPpS465qGILX3r0iZTwhDIwea1KmshXWAkbzyi93fc="
+          "Value": "sha256-2abzQW/KNe92XwsLTVaPR9PKy70jSK9zRU1KIMSifko="
         }
       ]
     },
     {
-      "Route": "css/header.cstcm33qpp.css",
+      "Route": "css/header.dbc6b2rlug.css",
       "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\css\\header.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4178,7 +4178,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2777"
+          "Value": "3535"
         },
         {
           "Name": "Content-Type",
@@ -4186,11 +4186,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zJPpS465qGILX3r0iZTwhDIwea1KmshXWAkbzyi93fc=\""
+          "Value": "\"2abzQW/KNe92XwsLTVaPR9PKy70jSK9zRU1KIMSifko=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 03 Jun 2025 17:44:42 GMT"
+          "Value": "Tue, 03 Jun 2025 19:08:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4200,7 +4200,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "cstcm33qpp"
+          "Value": "dbc6b2rlug"
         },
         {
           "Name": "label",
@@ -4208,7 +4208,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-zJPpS465qGILX3r0iZTwhDIwea1KmshXWAkbzyi93fc="
+          "Value": "sha256-2abzQW/KNe92XwsLTVaPR9PKy70jSK9zRU1KIMSifko="
         }
       ]
     },

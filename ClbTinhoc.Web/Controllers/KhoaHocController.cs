@@ -318,9 +318,28 @@ namespace ClbTinhoc.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MaKhoaHoc,TenKhoaHoc,MoTa,NgayBatDau,NgayKetThuc,image")] KhoaHoc khoaHoc, IFormFile ImageFile)
         {
+            // Check if user is admin
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "admin")
+            {
+                TempData["ErrorMessage"] = "Bạn không có quyền sửa khóa học!";
+                return RedirectToAction(nameof(Index));
+            }
+
             if (id != khoaHoc.MaKhoaHoc)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Không tìm thấy khóa học cần sửa.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Retain existing image path if no new file is uploaded
+            if (ImageFile == null)
+            {
+                var existingKhoaHoc = await _context.KhoaHoc.AsNoTracking().FirstOrDefaultAsync(k => k.MaKhoaHoc == id);
+                if (existingKhoaHoc != null)
+                {
+                    khoaHoc.image = existingKhoaHoc.image;
+                }
             }
 
             if (ModelState.IsValid)
@@ -334,12 +353,14 @@ namespace ClbTinhoc.Web.Controllers
                         if (!allowedExtensions.Contains(extension))
                         {
                             ModelState.AddModelError("ImageFile", "Chỉ chấp nhận file .jpg, .jpeg, .png.");
+                            // Preserve other model state errors and return view
                             return View(khoaHoc);
                         }
 
                         if (ImageFile.Length > 5 * 1024 * 1024)
                         {
                             ModelState.AddModelError("ImageFile", "Kích thước file không được vượt quá 5MB.");
+                            // Preserve other model state errors and return view
                             return View(khoaHoc);
                         }
 
@@ -371,20 +392,32 @@ namespace ClbTinhoc.Web.Controllers
 
                     _context.Update(khoaHoc);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Cập nhật khóa học thành công!";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!KhoaHocExists(khoaHoc.MaKhoaHoc))
                     {
-                        return NotFound();
+                        TempData["ErrorMessage"] = "Không tìm thấy khóa học khi cập nhật.";
+                        return RedirectToAction(nameof(Index));
                     }
                     else
                     {
-                        throw;
+                        TempData["ErrorMessage"] = "Lỗi đồng thời khi cập nhật khóa học.";
+                        return RedirectToAction(nameof(Index));
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error updating KhoaHoc");
+                    TempData["ErrorMessage"] = "Có lỗi xảy ra khi cập nhật khóa học: " + ex.Message;
+                    return RedirectToAction(nameof(Index));
+                }
             }
+
+            // If we got this far, something failed, redisplay form
+            // (ModelState was not valid)
             return View(khoaHoc);
         }
 
