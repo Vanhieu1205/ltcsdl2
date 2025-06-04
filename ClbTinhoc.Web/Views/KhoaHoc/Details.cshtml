@@ -48,85 +48,22 @@
             <div class="mt-3">
                 @if (userRole == "admin")
                 {
-                    <button id="registerCourseBtn" class="btn btn-primary">Đăng ký sinh viên</button>
-                    <button id="registerSupportBtn" class="btn btn-info">Đăng ký support</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#registerCourseModal">Đăng ký sinh viên</button>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                        data-bs-target="#registerSupportModal">Đăng ký support</button>
                 }
                 @if (userRole == "user")
                 {
-                    <button id="registerCourseBtn" class="btn btn-primary">Đăng ký sinh viên</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#registerCourseModal">Đăng ký sinh viên</button>
                 }
-
-            </div>
-            <div id="registerCourseForm" class="mt-3" style="display:none;">
-                <form asp-action="RegisterCourse" asp-controller="KhoaHoc" method="post">
-                    <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
-                    <div class="form-group">
-                        <label for="MaSinhVien">Chọn sinh viên</label>
-                        <div class="input-group">
-                            <select name="MaSinhVien" id="MaSinhVien" class="form-control select2" required>
-                                <option value="">-- Chọn sinh viên --</option>
-                                @if (ViewBag.AvailableStudents != null && ViewBag.AvailableStudents.Count > 0)
-                                {
-                                    @foreach (var student in ViewBag.AvailableStudents)
-                                    {
-                                        <option value="@student.MaSinhVien">@student.HoTen (@student.MaSinhVien)</option>
-                                    }
-                                }
-                            </select>
-                            <button type="button" class="btn btn-outline-secondary"
-                                onclick="$('#MaSinhVien').select2('open');">
-                                <i class="bi bi-caret-down-fill"></i>
-                            </button>
-                        </div>
-                        @if (ViewBag.AvailableStudents == null || ViewBag.AvailableStudents.Count == 0)
-                        {
-                            <small class="text-danger">Không có sinh viên nào khả dụng</small>
-                        }
-                    </div>
-                    <div class="form-group mt-3">
-                        <button type="submit" class="btn btn-success">Xác nhận đăng ký</button>
-                        <button type="button" id="cancelRegisterCourse" class="btn btn-secondary">Hủy</button>
-                    </div>
-                </form>
-            </div>
-            <div id="registerSupportForm" class="mt-3" style="display:none;">
-                <form asp-action="RegisterSupport" asp-controller="KhoaHoc" method="post">
-                    <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
-                    <div class="form-group">
-                        <label for="MaSupport">Chọn support</label>
-                        <div class="input-group">
-                            <select name="MaSupport" id="MaSupport" class="form-control select2" required>
-                                <option value="">-- Chọn support --</option>
-                                @if (ViewBag.AvailableSupports != null && ViewBag.AvailableSupports.Count > 0)
-                                {
-                                    @foreach (var support in ViewBag.AvailableSupports)
-                                    {
-                                        <option value="@support.MaSupport">@support.HoTen (@support.MaSupport)</option>
-                                    }
-                                }
-                            </select>
-                            <button type="button" class="btn btn-outline-secondary"
-                                onclick="$('#MaSupport').select2('open');">
-                                <i class="bi bi-caret-down-fill"></i>
-                            </button>
-                        </div>
-                        @if (ViewBag.AvailableSupports == null || ViewBag.AvailableSupports.Count == 0)
-                        {
-                            <small class="text-danger">Không có support nào khả dụng</small>
-                        }
-                    </div>
-                    <div class="form-group mt-3">
-                        <button type="submit" class="btn btn-success">Xác nhận đăng ký</button>
-                        <button type="button" id="cancelRegisterSupport" class="btn btn-secondary">Hủy</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
 
     <h3 class="mt-4">Danh sách sinh viên chờ duyệt</h3>
-    @if (Model.KhoaHoc_SinhVien != null && Model.KhoaHoc_SinhVien.Any(x => x.TrangThai ==
-        "ChoDuyet"))
+    @if (Model.KhoaHoc_SinhVien != null && Model.KhoaHoc_SinhVien.Any(x => x.TrangThai == "ChoDuyet"))
     {
         <table class="table table-warning">
             <thead>
@@ -164,7 +101,6 @@
                                 </form>
                             </td>
                         }
-
                     </tr>
                 }
             </tbody>
@@ -195,12 +131,14 @@
                         <td>
                             <a asp-controller="SinhVien" asp-action="Details" asp-route-id="@ks.MaSinhVien"
                                 class="btn btn-sm btn-info">Chi tiết</a>
-                            <button type="button" class="btn btn-sm btn-danger"
-                                onclick="confirmDeleteStudent('@ks.MaSinhVien', '@ks.SinhVien?.HoTen')">
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#deleteStudentModal" data-ma-sinh-vien="@ks.MaSinhVien"
+                                data-ho-ten="@ks.SinhVien?.HoTen">
                                 Xóa
                             </button>
-                            <button type="button" class="btn btn-sm btn-primary"
-                                onclick="showNhapDiemModal('@ks.MaSinhVien', '@ks.SinhVien?.HoTen')">
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#nhapDiemModal" data-ma-sinh-vien="@ks.MaSinhVien"
+                                data-ho-ten="@ks.SinhVien?.HoTen">
                                 Nhập điểm
                             </button>
                         </td>
@@ -240,8 +178,9 @@
                         <td>
                             <a asp-controller="Support" asp-action="Details" asp-route-id="@ks.MaSupport"
                                 class="btn btn-sm btn-info">Chi tiết</a>
-                            <button type="button" class="btn btn-sm btn-danger"
-                                onclick="confirmDeleteSupport('@ks.MaSupport', '@ks.Support?.HoTen')">
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#deleteSupportModal" data-ma-support="@ks.MaSupport"
+                                data-ho-ten="@ks.Support?.HoTen">
                                 Xóa
                             </button>
                         </td>
@@ -288,6 +227,82 @@
 
 <div class="mt-3">
     <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+</div>
+
+<!-- Modal đăng ký sinh viên -->
+<div class="modal fade" id="registerCourseModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Đăng ký sinh viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="RegisterCourse" asp-controller="KhoaHoc" method="post">
+                    <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
+                    <div class="form-group">
+                        <label for="MaSinhVien">Chọn sinh viên</label>
+                        <select name="MaSinhVien" id="MaSinhVien" class="form-control select2" required>
+                            <option value="">-- Chọn sinh viên --</option>
+                            @if (ViewBag.AvailableStudents != null && ViewBag.AvailableStudents.Count > 0)
+                            {
+                                @foreach (var student in ViewBag.AvailableStudents)
+                                {
+                                    <option value="@student.MaSinhVien">@student.HoTen (@student.MaSinhVien)</option>
+                                }
+                            }
+                        </select>
+                        @if (ViewBag.AvailableStudents == null || ViewBag.AvailableStudents.Count == 0)
+                        {
+                            <small class="text-danger">Không có sinh viên nào khả dụng</small>
+                        }
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-success">Xác nhận đăng ký</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal đăng ký support -->
+<div class="modal fade" id="registerSupportModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Đăng ký support</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="RegisterSupport" asp-controller="KhoaHoc" method="post">
+                    <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
+                    <div class="form-group">
+                        <label for="MaSupport">Chọn support</label>
+                        <select name="MaSupport" id="MaSupport" class="form-control select2" required>
+                            <option value="">-- Chọn support --</option>
+                            @if (ViewBag.AvailableSupports != null && ViewBag.AvailableSupports.Count > 0)
+                            {
+                                @foreach (var support in ViewBag.AvailableSupports)
+                                {
+                                    <option value="@support.MaSupport">@support.HoTen (@support.MaSupport)</option>
+                                }
+                            }
+                        </select>
+                        @if (ViewBag.AvailableSupports == null || ViewBag.AvailableSupports.Count == 0)
+                        {
+                            <small class="text-danger">Không có support nào khả dụng</small>
+                        }
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-success">Xác nhận đăng ký</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal xác nhận xóa sinh viên -->
@@ -345,7 +360,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="nhapDiemForm" asp-action="NhapDiem" asp-controller="KetQua" method="post">
+                <form asp-action="NhapDiem" asp-controller="KhoaHoc" method="post">
                     <input type="hidden" name="MaKhoaHoc" value="@Model.MaKhoaHoc" />
                     <input type="hidden" name="MaSinhVien" id="nhapDiemMaSinhVien" />
                     <div class="form-group">
@@ -356,11 +371,11 @@
                         <input type="number" class="form-control" id="DiemCuoiKy" name="DiemCuoiKy" step="0.1" min="0"
                             max="10" required>
                     </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-primary">Lưu điểm</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary" onclick="submitNhapDiem()">Lưu điểm</button>
             </div>
         </div>
     </div>
@@ -374,101 +389,64 @@
 
     <script>
         $(document).ready(function () {
-            // Khởi tạo Select2 cho sinh viên
-            $('#MaSinhVien').select2({
-                placeholder: "-- Chọn sinh viên --",
-                allowClear: true,
-                width: '100%',
-                dropdownParent: $('#registerCourseForm')
+            // Khởi tạo Select2 khi modal đăng ký sinh viên được hiển thị
+            $('#registerCourseModal').on('shown.bs.modal', function () {
+                $('#MaSinhVien').select2({
+                    placeholder: "-- Chọn sinh viên --",
+                    allowClear: true,
+                    width: '100%',
+                    dropdownParent: $('#registerCourseModal .modal-body')
+                });
             });
 
-            // Khởi tạo Select2 cho support
-            $('#MaSupport').select2({
-                placeholder: "-- Chọn support --",
-                allowClear: true,
-                width: '100%',
-                dropdownParent: $('#registerSupportForm')
+            // Khởi tạo Select2 khi modal đăng ký support được hiển thị
+            $('#registerSupportModal').on('shown.bs.modal', function () {
+                $('#MaSupport').select2({
+                    placeholder: "-- Chọn support --",
+                    allowClear: true,
+                    width: '100%',
+                    dropdownParent: $('#registerSupportModal .modal-body')
+                });
             });
 
-            // Hiển thị/ẩn form đăng ký sinh viên
-            $('#registerCourseBtn').click(function () {
-                $('#registerCourseForm').show();
-                $('#registerSupportForm').hide();
+            // Xử lý modal xóa sinh viên
+            $('#deleteStudentModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var maSinhVien = button.data('ma-sinh-vien');
+                var hoTen = button.data('ho-ten');
+                $('#deleteStudentId').val(maSinhVien);
+                $('#studentName').text(hoTen);
             });
 
-            $('#cancelRegisterCourse').click(function () {
-                $('#registerCourseForm').hide();
-                $('#MaSinhVien').val('').trigger('change');
+            // Xử lý modal xóa support
+            $('#deleteSupportModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var maSupport = button.data('ma-support');
+                var hoTen = button.data('ho-ten');
+                $('#deleteSupportId').val(maSupport);
+                $('#supportName').text(hoTen);
             });
 
-            // Hiển thị/ẩn form đăng ký support
-            $('#registerSupportBtn').click(function () {
-                $('#registerSupportForm').show();
-                $('#registerCourseForm').hide();
-            });
+            // Xử lý modal nhập điểm
+            $('#nhapDiemModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var maSinhVien = button.data('ma-sinh-vien');
+                var hoTen = button.data('ho-ten');
+                $('#nhapDiemMaSinhVien').val(maSinhVien);
+                $('#nhapDiemTenSinhVien').text(hoTen);
 
-            $('#cancelRegisterSupport').click(function () {
-                $('#registerSupportForm').hide();
-                $('#MaSupport').val('').trigger('change');
+                // Lấy điểm hiện tại nếu có
+                $.get('/KhoaHoc/GetDiem', {
+                    maSinhVien: maSinhVien,
+                    maKhoaHoc: @Model.MaKhoaHoc
+                        }, function (data) {
+                    if (data && data.success && data.diemCuoiKy) {
+                        $('#DiemCuoiKy').val(data.diemCuoiKy);
+                    } else {
+                        $('#DiemCuoiKy').val('');
+                    }
+                });
             });
         });
-
-        // Hàm xác nhận xóa sinh viên
-        function confirmDeleteStudent(maSinhVien, hoTen) {
-            $('#deleteStudentId').val(maSinhVien);
-            $('#studentName').text(hoTen);
-            var modal = new bootstrap.Modal(document.getElementById('deleteStudentModal'));
-            modal.show();
-        }
-
-        // Hàm xác nhận xóa support
-        function confirmDeleteSupport(maSupport, hoTen) {
-            $('#deleteSupportId').val(maSupport);
-            $('#supportName').text(hoTen);
-            var modal = new bootstrap.Modal(document.getElementById('deleteSupportModal'));
-            modal.show();
-        }
-
-        // Hàm hiển thị modal nhập điểm
-        function showNhapDiemModal(maSinhVien, hoTen) {
-            $('#nhapDiemMaSinhVien').val(maSinhVien);
-            $('#nhapDiemTenSinhVien').text(hoTen);
-
-            // Lấy điểm hiện tại nếu có
-            $.get('/KetQua/GetDiem', {
-                maSinhVien: maSinhVien,
-                maKhoaHoc: @Model.MaKhoaHoc
-                    }, function (data) {
-                if (data && data.diemCuoiKy) {
-                    $('#DiemCuoiKy').val(data.diemCuoiKy);
-                } else {
-                    $('#DiemCuoiKy').val('');
-                }
-            });
-
-            var modal = new bootstrap.Modal(document.getElementById('nhapDiemModal'));
-            modal.show();
-        }
-
-        // Hàm submit form nhập điểm
-        function submitNhapDiem() {
-            var form = $('#nhapDiemForm');
-            $.ajax({
-                url: form.attr('action'),
-                type: 'POST',
-                data: form.serialize(),
-                success: function (result) {
-                    if (result.success) {
-                        alert('Nhập điểm thành công!');
-                        location.reload();
-                    } else {
-                        alert('Có lỗi xảy ra: ' + result.message);
-                    }
-                },
-                error: function () {
-                    alert('Có lỗi xảy ra khi nhập điểm!');
-                }
-            });
-        }
     </script>
 }

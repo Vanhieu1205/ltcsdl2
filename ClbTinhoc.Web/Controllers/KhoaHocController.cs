@@ -545,5 +545,81 @@ namespace ClbTinhoc.Web.Controllers
             }
             return RedirectToAction("Details", new { id = MaKhoaHoc });
         }
+
+        // GET: KhoaHoc/GetDiem
+        [HttpGet]
+        public async Task<IActionResult> GetDiem(int maKhoaHoc, string maSinhVien)
+        {
+            var ketQua = await _context.KetQua
+                .FirstOrDefaultAsync(k => k.MaKhoaHoc == maKhoaHoc && k.MaSinhVien == maSinhVien);
+
+            if (ketQua == null)
+            {
+                return Json(new { success = false, message = "Không tìm thấy kết quả" });
+            }
+
+            return Json(new { success = true, diemCuoiKy = ketQua.DiemCuoiKy });
+        }
+
+        // POST: KhoaHoc/NhapDiem
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NhapDiem(int maKhoaHoc, string maSinhVien, decimal diemCuoiKy)
+        {
+            try
+            {
+                var ketQua = await _context.KetQua
+                    .FirstOrDefaultAsync(k => k.MaKhoaHoc == maKhoaHoc && k.MaSinhVien == maSinhVien);
+
+                if (ketQua == null)
+                {
+                    ketQua = new KetQua
+                    {
+                        MaKhoaHoc = maKhoaHoc,
+                        MaSinhVien = maSinhVien,
+                        DiemCuoiKy = (double)diemCuoiKy
+                    };
+                    _context.KetQua.Add(ketQua);
+                }
+                else
+                {
+                    ketQua.DiemCuoiKy = (double)diemCuoiKy;
+                }
+
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error saving grade: {ex.Message}");
+                return Json(new { success = false, message = "Có lỗi xảy ra khi lưu điểm" });
+            }
+        }
+
+        // GET: KhoaHoc/ConfirmDeleteStudent
+        [HttpGet]
+        public async Task<IActionResult> ConfirmDeleteStudent(int maKhoaHoc, string maSinhVien)
+        {
+            var sinhVien = await _context.SinhVien.FindAsync(maSinhVien);
+            if (sinhVien == null)
+            {
+                return Json(new { success = false, message = "Không tìm thấy sinh viên" });
+            }
+
+            return Json(new { success = true, hoTen = sinhVien.HoTen });
+        }
+
+        // GET: KhoaHoc/ConfirmDeleteSupport
+        [HttpGet]
+        public async Task<IActionResult> ConfirmDeleteSupport(int maKhoaHoc, string maSupport)
+        {
+            var support = await _context.Support.FindAsync(maSupport);
+            if (support == null)
+            {
+                return Json(new { success = false, message = "Không tìm thấy support" });
+            }
+
+            return Json(new { success = true, hoTen = support.HoTen });
+        }
     }
 }

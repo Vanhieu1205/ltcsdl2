@@ -67,6 +67,7 @@ wwwroot\images\python.png
 wwwroot\images\react.png
 wwwroot\images\test.jpg
 wwwroot\images\test1.png
+wwwroot\images\test111.jpg
 wwwroot\images\v03y1pjo.png
 wwwroot\images\xzwb2kzm.jpg
 wwwroot\js\site.js

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kaFKlWhqtO9nENeyc5fWVcaCPA51TfM+nodZQkIYjuo=",
+  "Hash": "jl3nNmUSh6cdS051D1c+SKBS3kTKbDCPyUOXHJp5CNM=",
   "Source": "ClbTinhoc.Web",
   "BasePath": "_content/ClbTinhoc.Web",
   "Mode": "Default",
@@ -2768,6 +2768,27 @@
       "OriginalItemSpec": "wwwroot\\images\\test1.png"
     },
     {
+      "Identity": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\test111.jpg",
+      "SourceId": "ClbTinhoc.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\",
+      "BasePath": "_content/ClbTinhoc.Web",
+      "RelativePath": "images/test111#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "m1fm6q6f2o",
+      "Integrity": "VnyPgMVlbcLBZoVfqJLHKMfb0p1ywfCreo+5GeEJVCI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\test111.jpg"
+    },
+    {
       "Identity": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\v03y1pjo.png",
       "SourceId": "ClbTinhoc.Web",
       "SourceType": "Discovered",
@@ -4052,7 +4073,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 16:00:07 GMT"
+          "Value": "Wed, 04 Jun 2025 16:09:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4089,7 +4110,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 16:00:07 GMT"
+          "Value": "Wed, 04 Jun 2025 16:09:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4134,7 +4155,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 16:00:07 GMT"
+          "Value": "Wed, 04 Jun 2025 16:09:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4179,7 +4200,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 16:00:07 GMT"
+          "Value": "Wed, 04 Jun 2025 16:09:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12068,6 +12089,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-/PaaebbILKy1pMxSdu5UEenZBeQiFIG7qBIR+mcRAWk="
+        }
+      ]
+    },
+    {
+      "Route": "images/test111.jpg",
+      "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\test111.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4510"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VnyPgMVlbcLBZoVfqJLHKMfb0p1ywfCreo+5GeEJVCI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 16:01:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VnyPgMVlbcLBZoVfqJLHKMfb0p1ywfCreo+5GeEJVCI="
+        }
+      ]
+    },
+    {
+      "Route": "images/test111.m1fm6q6f2o.jpg",
+      "AssetFile": "D:\\code\\hk2-nam3\\ltcsdltest1\\ltcsdl2\\ClbTinhoc.Web\\wwwroot\\images\\test111.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4510"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VnyPgMVlbcLBZoVfqJLHKMfb0p1ywfCreo+5GeEJVCI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 16:01:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "m1fm6q6f2o"
+        },
+        {
+          "Name": "label",
+          "Value": "images/test111.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VnyPgMVlbcLBZoVfqJLHKMfb0p1ywfCreo+5GeEJVCI="
         }
       ]
     },
